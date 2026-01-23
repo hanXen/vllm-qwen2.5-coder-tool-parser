@@ -22,8 +22,9 @@ Related issues: [vLLM #10952](https://github.com/vllm-project/vllm/issues/10952)
 ```bash
 vllm serve Qwen/Qwen2.5-Coder-7B-Instruct \
     --enable-auto-tool-choice \
+    --tool-parser-plugin qwen2_5_coder_tool_parser.py \
     --tool-call-parser qwen2_5_coder \
-    --chat-template examples/tool_chat_template_qwen2_5_coder.jinja
+    --chat-template tool_chat_template_qwen2_5_coder.jinja
 ```
 
 ## Supported Formats
@@ -74,11 +75,17 @@ pytest tests/test_parser_unit.py -v
 
 Covers: single calls, parallel calls, JSON arrays, JSONL, comma-separated, unclosed tags, empty/invalid input, whitespace variations, double-escaped JSON, mixed content.
 
-### Output format analysis (requires vLLM server)
+### Output format analysis (requires vLLM server without `--chat-template`)
 
-Discovers how the model outputs tool calls under different system prompt strategies.
+Discovers how the model outputs tool calls under different system prompt strategies. The server must NOT use `--chat-template`, as it would inject `<tools>` few-shot examples and contaminate the format comparison.
 
 ```bash
+# Server without --chat-template
+vllm serve Qwen/Qwen2.5-Coder-7B-Instruct \
+    --enable-auto-tool-choice \
+    --tool-parser-plugin qwen2_5_coder_tool_parser.py \
+    --tool-call-parser qwen2_5_coder
+
 python tests/test_output_format.py --model Qwen/Qwen2.5-Coder-7B-Instruct
 ```
 
@@ -94,13 +101,15 @@ Tests 50 cases: single tool calls (10), parallel calls (10), complex arguments (
 
 ## Tested Models
 
-| Model | VRAM | Status |
-|-------|------|--------|
-| Qwen/Qwen2.5-Coder-7B-Instruct | ~8GB | ✅ 100% (50/50) |
-| Qwen/Qwen2.5-Coder-14B-Instruct | ~16GB | ✅ 98% (48/49)* |
-| Qwen/Qwen2.5-Coder-32B-Instruct-AWQ | ~20GB | ✅ 100% (50/50) |
+| Model | End-to-End | Notes |
+|-------|:----------:|-------|
+| Qwen/Qwen2.5-Coder-7B-Instruct | ✅ 50/50 | |
+| Qwen/Qwen2.5-Coder-14B-Instruct | 48/49* | 1 JSON malformation (model limitation) |
+| Qwen/Qwen2.5-Coder-32B-Instruct-AWQ | ✅ 50/50 | |
 
-\* 1 case excluded: model answered directly without calling tools (model behavior, not a parser issue). 1 failure: JSON-in-JSON escaping — model generates malformed JSON when tool arguments contain JSON content (known model limitation).
+Parser success rate is 100% across all models — all `<tools>` formatted output was parsed correctly. The one failure is a model-level JSON generation issue (JSON-in-JSON escaping: model outputs `}}}` instead of `}}`), not a parser issue.
+
+\* 1 additional case excluded: model answered directly without calling tools (model behavior).
 
 **Test environment:** vLLM 0.14.0, `temperature=0`, `max_tokens=1024`, `--chat-template`
 
@@ -173,7 +182,20 @@ Qwen2.5-7B-Instruct (non-Coder) uses hermes `<tool_call>` format natively regard
 <details>
 <summary><strong>Long System Prompt Robustness</strong></summary>
 
-Since the parser relies on few-shot examples in the system prompt to induce `<tools>` format, we tested whether long system prompts degrade the induction effectiveness.
+Since the parser relies on few-shot examples in the system prompt to induce `<tools>` format, we tested whether long system prompts degrade the induction effectiveness. These tests were run without `--chat-template`, using manual few-shot injection via `--prompt-mode`:
+
+```bash
+# Server without --chat-template
+vllm serve Qwen/Qwen2.5-Coder-7B-Instruct \
+    --enable-auto-tool-choice \
+    --tool-parser-plugin qwen2_5_coder_tool_parser.py \
+    --tool-call-parser qwen2_5_coder
+
+# Test with manual few-shot modes (minimal, explicit, or verbose)
+python tests/test_parser_vllm_integration.py --model Qwen/Qwen2.5-Coder-7B-Instruct --prompt-mode minimal
+python tests/test_parser_vllm_integration.py --model Qwen/Qwen2.5-Coder-7B-Instruct --prompt-mode explicit
+python tests/test_parser_vllm_integration.py --model Qwen/Qwen2.5-Coder-7B-Instruct --prompt-mode verbose
+```
 
 ### Explicit mode issue ([raw results](results/integration_explicit/))
 
