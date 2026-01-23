@@ -1,0 +1,813 @@
+{
+  "timestamp": "20260123_145342",
+  "model": "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ",
+  "repeat": 1,
+  "default_results": {
+    "prompt_name": "default",
+    "total": 10,
+    "format_counts": {
+      "plain_json": 10
+    },
+    "results": [
+      {
+        "query": "What's the weather in Seoul?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"Seoul\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"Seoul\"}}",
+          "extracted_json": {
+            "name": "get_weather",
+            "arguments": {
+              "city": "Seoul"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "What's the current temperature in New York?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"New York\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"New York\"}}",
+          "extracted_json": {
+            "name": "get_weather",
+            "arguments": {
+              "city": "New York"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Search for Python async programming tutorials",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"Python async programming tutorials\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"Python async programming tutorials\"}}",
+          "extracted_json": {
+            "name": "search_web",
+            "arguments": {
+              "query": "Python async programming tutorials"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Calculate 15% tip on $45",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"45 * 0.15\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"45 * 0.15\"}}",
+          "extracted_json": {
+            "name": "calculate",
+            "arguments": {
+              "expression": "45 * 0.15"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "What is 1234 * 5678?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"1234 * 5678\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"1234 * 5678\"}}",
+          "extracted_json": {
+            "name": "calculate",
+            "arguments": {
+              "expression": "1234 * 5678"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Translate 'Hello world' to Korean",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"translate\", \"arguments\": {\"text\": \"Hello world\", \"target_language\": \"Korean\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"translate\", \"arguments\": {\"text\": \"Hello world\", \"target_language\": \"Korean\"}}",
+          "extracted_json": {
+            "name": "translate",
+            "arguments": {
+              "text": "Hello world",
+              "target_language": "Korean"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Read the contents of config.json",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"read_file\", \"arguments\": {\"path\": \"config.json\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"read_file\", \"arguments\": {\"path\": \"config.json\"}}",
+          "extracted_json": {
+            "name": "read_file",
+            "arguments": {
+              "path": "config.json"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "What's the stock price of AAPL?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"get_stock_price\", \"arguments\": {\"symbol\": \"AAPL\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"get_stock_price\", \"arguments\": {\"symbol\": \"AAPL\"}}",
+          "extracted_json": {
+            "name": "get_stock_price",
+            "arguments": {
+              "symbol": "AAPL"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Set a reminder to call mom at 3pm",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"set_reminder\", \"arguments\": {\"message\": \"Call mom\", \"time\": \"3:00 PM\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"set_reminder\", \"arguments\": {\"message\": \"Call mom\", \"time\": \"3:00 PM\"}}",
+          "extracted_json": {
+            "name": "set_reminder",
+            "arguments": {
+              "message": "Call mom",
+              "time": "3:00 PM"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Search for machine learning papers on arxiv",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"machine learning papers on arxiv\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"machine learning papers on arxiv\"}}",
+          "extracted_json": {
+            "name": "search_web",
+            "arguments": {
+              "query": "machine learning papers on arxiv"
+            }
+          },
+          "format": "plain_json"
+        }
+      }
+    ]
+  },
+  "hermes_results": {
+    "prompt_name": "hermes",
+    "total": 10,
+    "format_counts": {
+      "plain_json": 10
+    },
+    "results": [
+      {
+        "query": "What's the weather in Seoul?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"Seoul\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"Seoul\"}}",
+          "extracted_json": {
+            "name": "get_weather",
+            "arguments": {
+              "city": "Seoul"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "What's the current temperature in New York?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"New York\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"get_weather\", \"arguments\": {\"city\": \"New York\"}}",
+          "extracted_json": {
+            "name": "get_weather",
+            "arguments": {
+              "city": "New York"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Search for Python async programming tutorials",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"Python async programming tutorials\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"Python async programming tutorials\"}}",
+          "extracted_json": {
+            "name": "search_web",
+            "arguments": {
+              "query": "Python async programming tutorials"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Calculate 15% tip on $45",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"45 * 0.15\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"45 * 0.15\"}}",
+          "extracted_json": {
+            "name": "calculate",
+            "arguments": {
+              "expression": "45 * 0.15"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "What is 1234 * 5678?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"1234 * 5678\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"calculate\", \"arguments\": {\"expression\": \"1234 * 5678\"}}",
+          "extracted_json": {
+            "name": "calculate",
+            "arguments": {
+              "expression": "1234 * 5678"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Translate 'Hello world' to Korean",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"translate\", \"arguments\": {\"text\": \"Hello world\", \"target_language\": \"Korean\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"translate\", \"arguments\": {\"text\": \"Hello world\", \"target_language\": \"Korean\"}}",
+          "extracted_json": {
+            "name": "translate",
+            "arguments": {
+              "text": "Hello world",
+              "target_language": "Korean"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Read the contents of config.json",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"read_file\", \"arguments\": {\"path\": \"config.json\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"read_file\", \"arguments\": {\"path\": \"config.json\"}}",
+          "extracted_json": {
+            "name": "read_file",
+            "arguments": {
+              "path": "config.json"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "What's the stock price of AAPL?",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"get_stock_price\", \"arguments\": {\"symbol\": \"AAPL\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"get_stock_price\", \"arguments\": {\"symbol\": \"AAPL\"}}",
+          "extracted_json": {
+            "name": "get_stock_price",
+            "arguments": {
+              "symbol": "AAPL"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Set a reminder to call mom at 3pm",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"set_reminder\", \"arguments\": {\"message\": \"Call mom\", \"time\": \"3pm\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"set_reminder\", \"arguments\": {\"message\": \"Call mom\", \"time\": \"3pm\"}}",
+          "extracted_json": {
+            "name": "set_reminder",
+            "arguments": {
+              "message": "Call mom",
+              "time": "3pm"
+            }
+          },
+          "format": "plain_json"
+        }
+      },
+      {
+        "query": "Search for machine learning papers on arxiv",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"machine learning papers on arxiv\"}}",
+        "format_analysis": {
+          "raw": "{\"name\": \"search_web\", \"arguments\": {\"query\": \"machine learning papers on arxiv\"}}",
+          "extracted_json": {
+            "name": "search_web",
+            "arguments": {
+              "query": "machine learning papers on arxiv"
+            }
+          },
+          "format": "plain_json"
+        }
+      }
+    ]
+  },
+  "tools_results": {
+    "prompt_name": "tools",
+    "total": 10,
+    "format_counts": {
+      "native": 10
+    },
+    "results": [
+      {
+        "query": "What's the weather in Seoul?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "What's the current temperature in New York?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "Search for Python async programming tutorials",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Python async programming tutorials\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "Calculate 15% tip on $45",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"45 * 0.15\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "What is 1234 * 5678?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"1234 * 5678\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "Translate 'Hello world' to Korean",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"Hello world\", \"target_language\": \"Korean\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "Read the contents of config.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"config.json\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "What's the stock price of AAPL?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"AAPL\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "Set a reminder to call mom at 3pm",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "set_reminder",
+            "arguments": "{\"message\": \"Call mom\", \"time\": \"3:00 PM\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      },
+      {
+        "query": "Search for machine learning papers on arxiv",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"machine learning papers on arxiv\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null
+      }
+    ]
+  },
+  "edge_case_results": {
+    "parallel": [
+      {
+        "query": "What's the weather in Seoul and New York?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          }
+        ],
+        "content": "To get the weather for both Seoul and New York, I'll call the `get_weather` function twice with the respective city names.",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 cities weather (same tool)"
+      },
+      {
+        "query": "Read config.json and settings.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"config.json\"}"
+          },
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"settings.json\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 files read (same tool)"
+      },
+      {
+        "query": "Search for Python tutorials and JavaScript tutorials",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Python tutorials\"}"
+          },
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"JavaScript tutorials\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 web searches (same tool)"
+      },
+      {
+        "query": "Get stock prices for AAPL and GOOGL",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"AAPL\"}"
+          },
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"GOOGL\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 stock queries (same tool)"
+      },
+      {
+        "query": "What's the weather in Seoul, Tokyo, and London?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Tokyo\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"London\"}"
+          }
+        ],
+        "content": "To get the weather for Seoul, Tokyo, and London, I'll call the `get_weather` function for each city.",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "3 cities weather"
+      },
+      {
+        "query": "Read package.json, tsconfig.json, and .eslintrc.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"package.json\"}"
+          },
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"tsconfig.json\"}"
+          },
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \".eslintrc.json\"}"
+          }
+        ],
+        "content": "To read the contents of `package.json`, `tsconfig.json`, and `.eslintrc.json`, I'll call the `read_file` function for each file.",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "3 files read"
+      },
+      {
+        "query": "What's the weather in Seoul and search for Korean restaurants nearby",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          },
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Korean restaurants in Seoul\"}"
+          }
+        ],
+        "content": "Let's break this into two tasks: getting the weather in Seoul and searching for Korean restaurants nearby.\n\nFirst, I'll get the weather in Seoul.\n\n\n\nAfter that, I'll search for Korean restaurants nearby. Since we don't have the exact location, I'll assume we're looking for general information about Korean restaurants in Seoul.",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "Weather + search (different tools)"
+      },
+      {
+        "query": "Calculate 25% of 80 and translate the result to Spanish",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"0.25 * 80\"}"
+          }
+        ],
+        "content": "First, I'll calculate 25% of 80.",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "Calculate + translate (different tools)"
+      },
+      {
+        "query": "Get TSLA stock price and search for Tesla news",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"TSLA\"}"
+          },
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Tesla news\"}"
+          }
+        ],
+        "content": "Let's break this into two tasks: getting the stock price for TSLA and searching for Tesla news.\n\nFirst, I'll get the stock price for TSLA.\n\n\n\nNext, I'll search for Tesla news.",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "Stock + search (different tools)"
+      },
+      {
+        "query": "What's the weather in New York, Los Angeles, Chicago, and Miami?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Los Angeles\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Chicago\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Miami\"}"
+          }
+        ],
+        "content": "To get the weather for multiple cities, I'll call the `get_weather` function for each city.",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "4 cities weather"
+      }
+    ],
+    "complex_args": [
+      {
+        "query": "Send an email to john@example.com with subject 'Meeting Update' and body 'The meeting is rescheduled.\nPlease confirm your attendance.\nThank you.'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "send_email",
+            "arguments": "{\"to\": \"john@example.com\", \"subject\": \"Meeting Update\", \"body\": \"The meeting is rescheduled.\\nPlease confirm your attendance.\\nThank you.\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Email with newlines in body"
+      },
+      {
+        "query": "Translate this to Japanese: 'Hello! Please say \"nice to meet you\".'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"Hello! Please say \\\"nice to meet you\\\".\", \"target_language\": \"Japanese\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Text with nested quotes"
+      },
+      {
+        "query": "Search for 'C++ vs C#: pros & cons'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"C++ vs C#: pros & cons\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Query with special chars (++, #, &)"
+      },
+      {
+        "query": "Translate '你好世界' to English",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"你好世界\", \"target_language\": \"English\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Chinese characters in argument"
+      },
+      {
+        "query": "Translate 'こんにちは' to English",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"こんにちは\", \"target_language\": \"English\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Japanese characters in argument"
+      },
+      {
+        "query": "Translate '🎉 Congratulations! 🎊' to French",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"🎉 Congratulations! 🎊\", \"target_language\": \"French\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Emoji in argument"
+      },
+      {
+        "query": "Translate the following paragraph to German: 'The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.\", \"target_language\": \"German\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Long text argument"
+      },
+      {
+        "query": "Write to output.json the content: {\"name\": \"test\", \"value\": 123}",
+        "native_tool_calls": false,
+        "tool_calls": null,
+        "content": "<tools>\n{\"name\": \"write_file\", \"arguments\": {\"path\": \"output.json\", \"content\": \"{\\\"name\\\": \\\"test\\\", \\\"value\\\": 123}\"}}}\n</tools>",
+        "format_analysis": {
+          "raw": "<tools>\n{\"name\": \"write_file\", \"arguments\": {\"path\": \"output.json\", \"content\": \"{\\\"name\\\": \\\"test\\\", \\\"value\\\": 123}\"}}}\n</tools>",
+          "extracted_json": null,
+          "format": "tools_tag"
+        },
+        "category": "complex_args",
+        "description": "JSON content in argument"
+      },
+      {
+        "query": "Read the file at '/home/user/my documents/report.txt'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"/home/user/my documents/report.txt\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "File path with spaces"
+      },
+      {
+        "query": "Create a calendar event titled 'Team Sync: Q1 Review 📊' starting at '2024-01-15 10:00 AM' ending at '2024-01-15 11:30 AM' at 'Conference Room A (2nd Floor)'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "create_calendar_event",
+            "arguments": "{\"title\": \"Team Sync: Q1 Review ⎈\", \"start_time\": \"2024-01-15 10:00 AM\", \"end_time\": \"2024-01-15 11:30 AM\", \"location\": \"Conference Room A (2nd Floor)\"}"
+          }
+        ],
+        "content": null,
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Event with emoji, colon, parentheses"
+      }
+    ]
+  }
+}

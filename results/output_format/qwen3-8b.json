@@ -1,0 +1,730 @@
+{
+  "timestamp": "20260123_140042",
+  "model": "Qwen/Qwen3-8B",
+  "repeat": 1,
+  "default_results": {
+    "prompt_name": "default",
+    "total": 10,
+    "format_counts": {
+      "native": 10
+    },
+    "results": [
+      {
+        "query": "What's the weather in Seoul?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the weather in Seoul. Let me check which tool I can use. Oh, there's a function called get_weather that takes a city parameter. Seoul is the city here. So I need to call get_weather with city set to Seoul. Let me make sure the parameters are correct. The function requires \"city\" and it's a string. Yep, that's all. I'll format the tool call accordingly.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What's the current temperature in New York?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the current temperature in New York. Let me check which tools are available. There's a function called get_weather that takes a city parameter. That's exactly what I need here. I should call get_weather with the city set to \"New York\". No other parameters are required, just the city name. Let me make sure I spell it correctly. New York is the city, so the argument should be \"New York\". Alright, I'll structure the tool call accordingly.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Search for Python async programming tutorials",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Python async programming tutorials\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for Python async programming tutorials. Let me see which tool to use. The available tools include search_web, which is meant for web searches. The parameters require a query. The user's request is straightforward: they need tutorials on Python async programming. So I should call the search_web function with the query set to \"Python async programming tutorials\". That should fetch the relevant results. No other functions seem necessary here. Let me structure the tool call correctly.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Calculate 15% tip on $45",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"0.15 * 45\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to calculate a 15% tip on $45. Let me see. The available tools include a calculator function. The function is called 'calculate' and it takes an expression. So I need to convert the tip calculation into a mathematical expression. 15% of 45 is the same as 0.15 multiplied by 45. So the expression would be 0.15 * 45. Then, the function should return that value. Let me check if there are any other parameters or if I need to format it differently. No, the function just needs the expression as a string. So I'll call calculate with \"0.15 * 45\".\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What is 1234 * 5678?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"1234 * 5678\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the product of 1234 and 5678. Let me see which tool I can use here. The available tools include a calculator function called 'calculate' that takes a math expression. That's exactly what I need. The parameters require an 'expression' which in this case is \"1234 * 5678\". I should call the calculate function with that expression. No other tools seem relevant here. Let me make sure the JSON is correctly formatted with the expression as a string. Yep, that should do it.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Translate 'Hello world' to Korean",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"Hello world\", \"target_language\": \"Korean\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate 'Hello world' to Korean. Let me check the available tools. There's a translate function. The parameters required are text and target_language. The text is 'Hello world', and the target language is Korean. So I need to call the translate function with those arguments. Let me make sure the parameters are correctly formatted. Yep, that should do it.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Read the contents of config.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"config.json\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to read the contents of config.json. Let me check the available tools. There's a function called read_file that takes a path parameter. So I need to call read_file with the path set to \"config.json\". That should do it.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What's the stock price of AAPL?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"AAPL\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the stock price of AAPL. Let me check which tool I can use for that. Oh right, there's the get_stock_price function. It requires the stock ticker symbol as a parameter. The user provided \"AAPL\" which is the correct symbol for Apple. So I need to call get_stock_price with the symbol parameter set to \"AAPL\". Let me make sure I format the JSON correctly. The function name is get_stock_price and the arguments should include \"symbol\": \"AAPL\". I think that's all. No other parameters are needed for this function. Alright, I'll structure the tool call accordingly.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Set a reminder to call mom at 3pm",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "set_reminder",
+            "arguments": "{\"message\": \"call mom\", \"time\": \"3pm\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to set a reminder to call their mom at 3pm. Let me check the available tools. There's a function called set_reminder with parameters message and time. The message should be \"call mom\" and the time is \"3pm\". I need to make sure the time format is correct. The example given was \"3:00 PM\" or \"tomorrow 9am\", so \"3pm\" might be acceptable, but maybe it's better to use \"3:00 PM\" for consistency. Wait, the user wrote \"3pm\", so maybe I should keep it as is. The function requires both message and time, so I'll structure the JSON with those parameters. Let me double-check the required fields. Yes, both are required. Alright, I'll call set_reminder with message \"call mom\" and time \"3pm\".\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Search for machine learning papers on arxiv",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"machine learning papers arxiv\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for machine learning papers on arXiv. Let me check the available tools. There's a function called search_web that allows searching the web with a query. Since arXiv is a preprint server where machine learning papers are often found, I can use that. The parameters required are \"query\", so I should form a search query like \"machine learning papers arxiv\". I'll call the search_web function with that query to get the results.\n</think>\n\n",
+        "format_analysis": null
+      }
+    ]
+  },
+  "hermes_results": {
+    "prompt_name": "hermes",
+    "total": 10,
+    "format_counts": {
+      "native": 10
+    },
+    "results": [
+      {
+        "query": "What's the weather in Seoul?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking about the weather in Seoul. Let me check which tools are available. There's a function called get_weather that takes a city parameter. Since they mentioned Seoul, I should call that function with the city set to Seoul. I need to make sure the arguments are correctly formatted in JSON. No other tools seem necessary here. Alright, I'll structure the tool call accordingly.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What's the current temperature in New York?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the current temperature in New York. Let me check which tools are available. There's a function called get_weather that takes a city parameter. Since they want the temperature, I should use that function with the city set to New York. I don't need any other tools here. Let me make sure the parameters are correct. The required field is city, and it's a string. So the tool call should be get_weather with arguments {\"city\": \"New York\"}. That should fetch the current weather info for them.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Search for Python async programming tutorials",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Python async programming tutorials\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for Python async programming tutorials. Let me see which tool to use. The available tools include search_web, which is meant for web searches. The parameters require a query. The user's request is straightforward: they need tutorials on Python async programming. So I should call the search_web function with the query set to \"Python async programming tutorials\". That should fetch the relevant results. I don't need any other tools here since there's no indication of needing weather, translation, or other functions. Just a simple web search will handle this.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Calculate 15% tip on $45",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"0.15 * 45\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to calculate a 15% tip on $45. Let me see. The available tools include a calculator function. So I need to use the calculate function. The parameters require an expression. The expression here would be 15% of 45, which is 0.15 * 45. Let me check if that's correct. Yes, 15% as a decimal is 0.15. Multiplying that by 45 gives the tip amount. So the math expression is 0.15 * 45. I'll call the calculate function with that expression.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What is 1234 * 5678?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"1234 * 5678\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the product of 1234 and 5678. Let me see which tool I can use here. The available tools include a calculator function. The calculate function takes an expression as a parameter. So I need to pass the multiplication expression \"1234 * 5678\" to the calculate tool. Let me make sure the parameters are correct. The expression is a string, so it should be enclosed in quotes. Alright, the tool call should be straightforward.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Translate 'Hello world' to Korean",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"Hello world\", \"target_language\": \"ko\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate 'Hello world' into Korean. Let me check the available tools. There's a function called translate that takes text and target_language. The parameters required are text and target_language. The text here is 'Hello world', and the target language is Korean. So I need to call the translate function with those arguments. I should make sure the target_language is specified correctly, maybe using the language code 'ko' for Korean. Let me confirm the function's required parameters again. Yes, both text and target_language are required. So the tool call should be translate with text 'Hello world' and target_language 'ko'.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Read the contents of config.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"config.json\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to read the contents of config.json. Let me check the available tools. There's a function called read_file that takes a path parameter. So I need to call read_file with the path set to \"config.json\". That should do it.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What's the stock price of AAPL?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"AAPL\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the stock price of AAPL. Let me check which tool I can use for that. Oh right, there's the get_stock_price function. It requires the stock ticker symbol as a parameter. The user provided \"AAPL\" which is the correct symbol for Apple. So I need to call get_stock_price with the symbol argument set to \"AAPL\". Let me make sure I format the tool call correctly in JSON within the XML tags.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Set a reminder to call mom at 3pm",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "set_reminder",
+            "arguments": "{\"message\": \"call mom\", \"time\": \"3pm\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to set a reminder to call their mom at 3pm. Let me check the available tools. There's a function called set_reminder that takes a message and a time. The parameters are required, so I need both. The message here would be \"call mom\" and the time is \"3pm\". I should structure the tool call with those arguments. Let me make sure the time format is correct. The example uses \"3:00 PM\", but \"3pm\" is probably acceptable. Alright, I'll go with that.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Search for machine learning papers on arxiv",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"machine learning papers arXiv\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for machine learning papers on arXiv. Let me check the available tools. There's a function called search_web that allows searching the web with a query. Since arXiv is a preprint server where machine learning papers are often found, I should use that. The parameters require a query string. So I'll construct the query as \"machine learning papers arXiv\" to target the specific site. I'll call the search_web function with that query.\n</think>\n\n",
+        "format_analysis": null
+      }
+    ]
+  },
+  "tools_results": {
+    "prompt_name": "tools",
+    "total": 10,
+    "format_counts": {
+      "native": 10
+    },
+    "results": [
+      {
+        "query": "What's the weather in Seoul?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking about the weather in Seoul. Let me check which tools are available. There's a function called get_weather that takes a city parameter. Since they mentioned Seoul, I should call that function with the city set to Seoul. I don't need any other tools here. Just make sure to format the tool call correctly within the XML tags.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What's the current temperature in New York?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the current temperature in New York. Let me check which tools are available. There's a function called get_weather that takes a city parameter. Since they want the temperature, I should use that function with the city set to New York. I don't need any other tools here. Let me make sure the parameters are correct. The required field is city, and it's a string. So the tool call should be get_weather with arguments {\"city\": \"New York\"}. That should fetch the current weather info for them.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Search for Python async programming tutorials",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Python async programming tutorials\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for Python async programming tutorials. Let me see which tool to use. The available tools include search_web, which is meant for web searches. The parameters require a query. The user's request is straightforward: they need tutorials on Python async programming. So I should call the search_web function with the query set to \"Python async programming tutorials\". That should fetch the relevant results. I don't need any other tools here since there's no indication of needing weather, translation, or other functions. Just a simple web search will handle this.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Calculate 15% tip on $45",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"0.15 * 45\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to calculate a 15% tip on $45. Let me see. The available tools include a calculator function. So I need to use the calculate function. The parameters require an expression. The expression here would be 15% of 45, which is 0.15 * 45. Let me check if that's correct. Yes, 15% as a decimal is 0.15. Multiplying that by 45 gives the tip amount. So the math expression is 0.15 * 45. I'll call the calculate function with that expression.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What is 1234 * 5678?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"1234 * 5678\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the product of 1234 and 5678. Let me see which tool I can use here. The available tools include a calculator function. The calculate tool takes an expression as a parameter. So I need to pass the multiplication expression \"1234 * 5678\" to the calculate function. Let me make sure the parameters are correct. The expression is a string, so it should be enclosed in quotes. Alright, the function call should be calculate with the expression argument set to \"1234 * 5678\". That should handle the request.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Translate 'Hello world' to Korean",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"Hello world\", \"target_language\": \"Korean\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate 'Hello world' into Korean. Let me check the available tools. There's a translate function. The parameters required are text and target_language. The text is 'Hello world', and the target language is Korean. So I need to call the translate function with those arguments. Let me make sure the function name is correct and the parameters are properly formatted. Yep, that should do it.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Read the contents of config.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"config.json\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to read the contents of config.json. Let me check the available tools. There's a function called read_file that takes a path parameter. So I need to call read_file with the path set to \"config.json\". That should do it.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "What's the stock price of AAPL?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"AAPL\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the stock price of AAPL. Let me check which tool I can use for that. Oh right, there's the get_stock_price function. It requires the stock ticker symbol as a parameter. The user provided \"AAPL\" which is the correct symbol for Apple. So I need to call get_stock_price with the symbol argument set to \"AAPL\". Let me make sure I format the tool call correctly in JSON inside the XML tags.\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Set a reminder to call mom at 3pm",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "set_reminder",
+            "arguments": "{\"message\": \"call mom\", \"time\": \"3pm\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to set a reminder to call their mom at 3pm. Let me check the available tools. There's a function called set_reminder with parameters message and time. The message should be \"call mom\" and the time is \"3pm\". I need to make sure the time format is correct. The example in the tool uses \"3:00 PM\" or \"tomorrow 9am\", but the user said \"3pm\". Maybe it's okay to use \"3pm\" as the time. So I'll call set_reminder with message \"call mom\" and time \"3pm\".\n</think>\n\n",
+        "format_analysis": null
+      },
+      {
+        "query": "Search for machine learning papers on arxiv",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"machine learning papers arXiv\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for machine learning papers on arXiv. Let me check the available tools. There's a function called search_web that allows searching the web with a query. Since arXiv is a preprint server where machine learning papers are often found, I should use that. The parameters require a query string. So I'll construct the query as \"machine learning papers arXiv\" to target the specific site. I'll call the search_web function with that query.\n</think>\n\n",
+        "format_analysis": null
+      }
+    ]
+  },
+  "edge_case_results": {
+    "parallel": [
+      {
+        "query": "What's the weather in Seoul and New York?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the weather in both Seoul and New York. Let me check the available tools. There's a get_weather function that takes a city parameter. Since they want information for two cities, I need to call this function twice, once for each city. First, I'll handle Seoul. Then, I'll do the same for New York. I should make sure each tool call is properly formatted with the correct city name. No other functions seem necessary here. Alright, let's structure the tool calls.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 cities weather (same tool)"
+      },
+      {
+        "query": "Read config.json and settings.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"config.json\"}"
+          },
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"settings.json\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants me to read config.json and settings.json. Let me check the available tools. There's a read_file function that takes a path parameter. So I need to call that function for each JSON file. First, I'll read config.json by calling read_file with the path \"config.json\". Then, I'll do the same for settings.json. I should make two separate tool calls. Let me make sure the parameters are correct and the paths are accurate. Alright, that should do it.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 files read (same tool)"
+      },
+      {
+        "query": "Search for Python tutorials and JavaScript tutorials",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Python tutorials and JavaScript tutorials\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for Python tutorials and JavaScript tutorials. Let me check the available tools. There's a function called search_web that takes a query parameter. Since they want both languages, I should combine them into a single search query. Maybe \"Python tutorials and JavaScript tutorials\" as the query. So I'll call search_web with that query. I don't need to split them because the function can handle one query at a time. Let me make sure the parameters are correct. The required field is \"query\", and I'm providing that. Alright, that should work.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 web searches (same tool)"
+      },
+      {
+        "query": "Get stock prices for AAPL and GOOGL",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"AAPL\"}"
+          },
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"GOOGL\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants the stock prices for AAPL and GOOGL. Let me check the available tools. There's a function called get_stock_price that takes a symbol. Since they want two symbols, I need to call that function twice, once for each ticker. Let me make sure the parameters are correct. The symbol parameter is required and should be a string. So first call get_stock_price with symbol \"AAPL\", then another call with \"GOOGL\". That should get both prices.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "2 stock queries (same tool)"
+      },
+      {
+        "query": "What's the weather in Seoul, Tokyo, and London?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Tokyo\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"London\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the weather in Seoul, Tokyo, and London. Let me check the available tools. There's a get_weather function that takes a city parameter. Since they mentioned three cities, I need to call this function three times, once for each city. I'll make sure to specify each city name correctly in the arguments. Let me structure the tool calls properly.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "3 cities weather"
+      },
+      {
+        "query": "Read package.json, tsconfig.json, and .eslintrc.json",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"package.json\"}"
+          },
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"tsconfig.json\"}"
+          },
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \".eslintrc.json\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants me to read three JSON files: package.json, tsconfig.json, and .eslintrc.json. Let me check the available tools. There's a read_file function that takes a path parameter. So I need to call this function for each file.\n\nFirst, I'll handle package.json. The path would be \"package.json\". Then tsconfig.json, path is \"tsconfig.json\". Lastly, .eslintrc.json, the path is \".eslintrc.json\". I should make sure the file paths are correct. Since the user didn't specify any particular directory, I'll assume these files are in the current working directory. \n\nI need to make three separate tool calls. Each call will use the read_file function with the respective path. Let me structure each tool_call properly. No need for any other functions here since the task is straightforward. Just reading the files. Alright, let's put them in the required JSON format within the tool_call tags.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "3 files read"
+      },
+      {
+        "query": "What's the weather in Seoul and search for Korean restaurants nearby",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Seoul\"}"
+          },
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Korean restaurants near Seoul\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for two things: the weather in Seoul and a search for Korean restaurants nearby. Let me check the available tools.\n\nFirst, there's the get_weather function which requires a city parameter. Since the user mentioned Seoul, I can use that function with the city set to Seoul.\n\nNext, for searching Korean restaurants, the search_web function seems appropriate. The query parameter should be something like \"Korean restaurants near Seoul\" to get relevant results. I need to make sure the query is specific enough to find nearby places.\n\nI should call both functions. Let me structure the tool calls correctly. Each in its own tool_call tags. Make sure the JSON is properly formatted with the right parameters. No need for any other functions here. Alright, that should cover both parts of the user's request.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "Weather + search (different tools)"
+      },
+      {
+        "query": "Calculate 25% of 80 and translate the result to Spanish",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "calculate",
+            "arguments": "{\"expression\": \"25% of 80\"}"
+          },
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"20\", \"target_language\": \"Spanish\"}"
+          }
+        ],
+        "content": "<think>\nOkay, let's see. The user wants me to calculate 25% of 80 and then translate the result into Spanish. First, I need to handle the calculation part. The function available for this is 'calculate', which takes a mathematical expression. So, 25% of 80 is the same as 0.25 multiplied by 80. Let me check if that's correct. Yes, 25% as a decimal is 0.25, so 0.25 * 80 equals 20. \n\nOnce I have the result, which is 20, the next step is translating that number into Spanish. The 'translate' function requires the text to translate and the target language. The text here is \"20\", and the target language is Spanish. So I need to call the translate function with those parameters. \n\nWait, but numbers in Spanish are written the same way, right? So \"20\" in Spanish is still \"20\", but maybe the word is \"veinte\". But the user might expect the numerical value or the word. However, since the function is for translating text, if the input is the number as a string, the translation might convert it to the word. But the user said \"translate the result\", so maybe they want the number as a string translated. Hmm. But maybe the calculation result is a number, and translating that would be the word. But the user might just want the number in Spanish, which is the same digits. Wait, maybe the user wants the result of the calculation (which is 20) translated as the word. So \"20\" becomes \"veinte\". But I need to check if the translate function can handle numbers. Alternatively, maybe the user wants the entire sentence, but the original calculation is just the number. \n\nBut the user's instruction is to translate the result, so the result is 20. So I should first calculate 25% of 80, get 20, then translate \"20\" into Spanish. But maybe the user wants the result as a word. However, the function's parameters are text and target language. So if I pass \"20\" as text, target_language as \"Spanish\", the translation would be \"veinte\". But maybe the user expects the numerical value, which is the same. But the user might have intended to translate the word \"twenty\" to Spanish, but the calculation result is a number. \n\nAlternatively, maybe the user wants the result of the calculation (20) to be translated as the word. So the steps are: calculate 25% of 80 (20), then translate that number into Spanish. So the first function call is calculate with \"25% of 80\" or \"0.25 * 80\". Then, take the result, which is 20, and translate it. \n\nSo first, call calculate with expression \"25% of 80\" or \"0.25 * 80\". Let me check the function's parameters. The calculate function takes an expression as a string. So \"25% of 80\" might be acceptable, but maybe it's better to use \"0.25 * 80\" for accuracy. Then, the result is 20. Then, translate \"20\" to Spanish. \n\nSo the first tool call is calculate with expression \"0.25 * 80\". Then, the second tool call is translate with text \"20\" and target_language \"Spanish\". \n\nBut wait, the user might have intended to translate the word \"twenty\" instead of the number. But the calculation result is a number, so the text to translate is \"20\". So the steps are correct. \n\nTherefore, I need to make two tool calls: first calculate, then translate.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "Calculate + translate (different tools)"
+      },
+      {
+        "query": "Get TSLA stock price and search for Tesla news",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_stock_price",
+            "arguments": "{\"symbol\": \"TSLA\"}"
+          },
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"Tesla news\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants the TSLA stock price and Tesla news. Let me check the available tools. There's get_stock_price for the stock price, which requires the symbol. TSLA is the ticker, so that's straightforward. Then, for the news, the search_web function can be used with the query \"Tesla news\". I need to make two separate tool calls here. First, get_stock_price with symbol TSLA, then search_web with query Tesla news. Let me structure the JSON for each.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "Stock + search (different tools)"
+      },
+      {
+        "query": "What's the weather in New York, Los Angeles, Chicago, and Miami?",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"New York\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Los Angeles\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Chicago\"}"
+          },
+          {
+            "name": "get_weather",
+            "arguments": "{\"city\": \"Miami\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user is asking for the weather in four cities: New York, Los Angeles, Chicago, and Miami. Let me check the available tools. There's a get_weather function that takes a city parameter. Since they want the weather for multiple cities, I need to call get_weather for each city individually. The function can only handle one city at a time. So I'll make four separate tool calls, each with the respective city name. That's the best way to get the current weather for all the cities mentioned.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "parallel",
+        "description": "4 cities weather"
+      }
+    ],
+    "complex_args": [
+      {
+        "query": "Send an email to john@example.com with subject 'Meeting Update' and body 'The meeting is rescheduled.\nPlease confirm your attendance.\nThank you.'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "send_email",
+            "arguments": "{\"to\": \"john@example.com\", \"subject\": \"Meeting Update\", \"body\": \"The meeting is rescheduled. Please confirm your attendance. Thank you.\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to send an email to john@example.com. Let me check the tools available. There's a send_email function. The parameters required are to, subject, and body. The user provided all three: the email address is john@example.com, subject is 'Meeting Update', and the body is 'The meeting is rescheduled. Please confirm your attendance. Thank you.' So I need to call send_email with these arguments. I should make sure the JSON structure is correct and all required fields are included. No optional parameters here. Alright, that's all.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Email with newlines in body"
+      },
+      {
+        "query": "Translate this to Japanese: 'Hello! Please say \"nice to meet you\".'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"Hello! Please say \\\"nice to meet you\\\".\", \"target_language\": \"Japanese\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate the sentence \"Hello! Please say 'nice to meet you'.\" into Japanese. Let me check the available tools. There's a translate function that takes text and target_language. The parameters required are text and target_language. The text here is the given sentence, and the target language is Japanese. So I need to call the translate function with those arguments. I should make sure the sentence is correctly formatted and the target language is specified as 'Japanese'. Let me structure the JSON for the tool call.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Text with nested quotes"
+      },
+      {
+        "query": "Search for 'C++ vs C#: pros & cons'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "search_web",
+            "arguments": "{\"query\": \"C++ vs C#: pros & cons\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to search for information on 'C++ vs C#: pros & cons'. Let me check the available tools. There's a function called search_web that takes a query parameter. The query should be the search term. So I need to call search_web with the query set to 'C++ vs C#: pros & cons'. That should retrieve the necessary information. I don't need any other tools here since it's a straightforward search. Let me make sure the parameters are correctly formatted as JSON within the tool_call tags.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Query with special chars (++, #, &)"
+      },
+      {
+        "query": "Translate '你好世界' to English",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"你好世界\", \"target_language\": \"English\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate '你好世界' to English. Let me check the available tools. There's a translate function. The parameters required are text and target_language. The text here is '你好世界', and the target language is English. So I need to call the translate function with those arguments. Let me make sure I have both required fields. Yep, both are there. Alright, that's the tool call.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Chinese characters in argument"
+      },
+      {
+        "query": "Translate 'こんにちは' to English",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"こんにちは\", \"target_language\": \"English\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate 'こんにちは' to English. Let me check the available tools. There's a translate function that requires text and target_language. The text here is 'こんにちは', which is Japanese, so the target language should be English. I need to call the translate function with these parameters. Let me make sure I have both required arguments. Yep, text is the Japanese greeting and target_language is English. That should do it.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Japanese characters in argument"
+      },
+      {
+        "query": "Translate '🎉 Congratulations! 🎊' to French",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"🎉 Congratulations! 🎊\", \"target_language\": \"French\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate '🎉 Congratulations! 🎊' to French. Let me check the available tools. There's a translate function. The parameters needed are text and target_language. The text here is the message with emojis, and the target language is French. So I should call the translate function with those arguments. I need to make sure the emojis are included in the text. Let me structure the JSON correctly.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Emoji in argument"
+      },
+      {
+        "query": "Translate the following paragraph to German: 'The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "translate",
+            "arguments": "{\"text\": \"The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.\", \"target_language\": \"German\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to translate a paragraph into German. Let me check the available tools. There's a translate function that requires the text and target language. The paragraph provided is in English, so I need to set the target_language to 'German'. I'll make sure to include both parameters in the tool call. Let me structure the JSON correctly with the text and target_language. No other functions are needed here. Just the translate tool.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Long text argument"
+      },
+      {
+        "query": "Write to output.json the content: {\"name\": \"test\", \"value\": 123}",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "write_file",
+            "arguments": "{\"path\": \"output.json\", \"content\": \"{\\\"name\\\": \\\"test\\\", \\\"value\\\": 123}\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants me to write content to a file called output.json. The content they provided is a JSON object: {\"name\": \"test\", \"value\": 123}. Let me check the available tools.\n\nLooking at the tools, there's a function called write_file. Its parameters are path and content. The path is the file path, and content is the data to write. Since the user specified the filename as output.json, I should use that as the path. The content is the JSON string they provided. \n\nWait, do I need to handle the JSON formatting myself, or does the write_file function take care of it? The description says to write the content, so I should pass the exact string they provided. So the arguments would be path: \"output.json\" and content: \"{\\\"name\\\": \\\"test\\\", \\\"value\\\": 123}\".\n\nI need to make sure the JSON is properly escaped. So the tool call should be write_file with those arguments. Let me double-check the required parameters. The write_file function requires both path and content, which I have. Alright, that should do it.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "JSON content in argument"
+      },
+      {
+        "query": "Read the file at '/home/user/my documents/report.txt'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "arguments": "{\"path\": \"/home/user/my documents/report.txt\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants me to read the file located at '/home/user/my documents/report.txt'. Let me check the available tools. There's a function called read_file that takes a path parameter. The required parameter is path, so I need to provide that. The file path given by the user is '/home/user/my documents/report.txt'. I should call the read_file function with this path. I don't see any other parameters needed. Let me make sure the JSON is correctly formatted with the path. Alright, that should do it.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "File path with spaces"
+      },
+      {
+        "query": "Create a calendar event titled 'Team Sync: Q1 Review 📊' starting at '2024-01-15 10:00 AM' ending at '2024-01-15 11:30 AM' at 'Conference Room A (2nd Floor)'",
+        "native_tool_calls": true,
+        "tool_calls": [
+          {
+            "name": "create_calendar_event",
+            "arguments": "{\"title\": \"Team Sync: Q1 Review 📊\", \"start_time\": \"2024-01-15 10:00 AM\", \"end_time\": \"2024-01-15 11:30 AM\", \"location\": \"Conference Room A (2nd Floor)\"}"
+          }
+        ],
+        "content": "<think>\nOkay, the user wants to create a calendar event. Let me check the available tools. There's a function called create_calendar_event. The parameters required are title, start_time, end_time, and location is optional.\n\nThe user provided the title as 'Team Sync: Q1 Review 📊', start time '2024-01-15 10:00 AM', end time '2024-01-15 11:30 AM', and location 'Conference Room A (2nd Floor)'. \n\nI need to make sure all required parameters are included. Title, start_time, and end_time are required. The location is optional but provided here. So I should structure the tool call with all these details. Let me format the JSON accordingly, making sure the dates and times are correctly formatted as strings. No issues here, everything looks good. Time to output the tool call.\n</think>\n\n",
+        "format_analysis": null,
+        "category": "complex_args",
+        "description": "Event with emoji, colon, parentheses"
+      }
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+[project]
+name = "vllm-qwen2-5-coder-tool-parser"
+version = "0.1.0"
+description = "Add your description here"
+requires-python = ">=3.13"
+dependencies = [
+    "openai>=2.15.0",
+    "pytest>=9.0.2",
+    "pyyaml>=6.0.3",
+]
+
+[dependency-groups]
+dev = [
+    "pylint>=4.0.4",
+]
+
+[tool.pylint.messages_control]
+disable = [
+    "import-error",
+    "duplicate-code",
+]

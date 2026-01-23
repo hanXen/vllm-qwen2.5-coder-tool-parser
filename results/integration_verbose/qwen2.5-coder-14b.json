@@ -1,0 +1,1825 @@
+{
+  "timestamp": "20260123_161135",
+  "model": "Qwen/Qwen2.5-Coder-14B-Instruct",
+  "repeat": 1,
+  "prompt_mode": "verbose",
+  "tools_count": 10,
+  "tests_count": 50,
+  "results": [
+    {
+      "category": "single",
+      "query": "What's the weather in Seoul?",
+      "description": "Basic weather query",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Seoul"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'Seoul'",
+              "actual": "Seoul"
+            }
+          },
+          "actual_args": {
+            "city": "Seoul"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "What's the current temperature in New York?",
+      "description": "Weather query with different phrasing",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "New York"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'New York'",
+              "actual": "New York"
+            }
+          },
+          "actual_args": {
+            "city": "New York"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "Search for Python async programming tutorials",
+      "description": "Web search query",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "search_web"
+      ],
+      "tool_args": [
+        {
+          "query": "Python async programming tutorials"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "search_web",
+          "valid": true,
+          "details": {
+            "query": {
+              "valid": true,
+              "reason": "matches regex '(?i)python|async'",
+              "actual": "Python async programming tutorials"
+            }
+          },
+          "actual_args": {
+            "query": "Python async programming tutorials"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "Calculate 15% tip on $45",
+      "description": "Calculation with percentage",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "calculate"
+      ],
+      "tool_args": [
+        {
+          "expression": "45 * 0.15"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "calculate",
+          "valid": true,
+          "details": {
+            "expression": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "45 * 0.15"
+            }
+          },
+          "actual_args": {
+            "expression": "45 * 0.15"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "What is 1234 * 5678?",
+      "description": "Basic multiplication",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "calculate"
+      ],
+      "tool_args": [
+        {
+          "expression": "1234 * 5678"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "calculate",
+          "valid": true,
+          "details": {
+            "expression": {
+              "valid": true,
+              "reason": "contains '1234'",
+              "actual": "1234 * 5678"
+            }
+          },
+          "actual_args": {
+            "expression": "1234 * 5678"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "Translate 'Hello world' to Korean",
+      "description": "Translation request",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "translate"
+      ],
+      "tool_args": [
+        {
+          "text": "Hello world",
+          "target_language": "Korean"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "translate",
+          "valid": true,
+          "details": {
+            "text": {
+              "valid": true,
+              "reason": "contains 'Hello'",
+              "actual": "Hello world"
+            },
+            "target_language": {
+              "valid": true,
+              "reason": "matches regex '(?i)korean|ko'",
+              "actual": "Korean"
+            }
+          },
+          "actual_args": {
+            "text": "Hello world",
+            "target_language": "Korean"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "Read the contents of config.json",
+      "description": "File read request",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "read_file"
+      ],
+      "tool_args": [
+        {
+          "path": "config.json"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "read_file",
+          "valid": true,
+          "details": {
+            "path": {
+              "valid": true,
+              "reason": "contains 'config.json'",
+              "actual": "config.json"
+            }
+          },
+          "actual_args": {
+            "path": "config.json"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "What's the stock price of AAPL?",
+      "description": "Stock price query",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_stock_price"
+      ],
+      "tool_args": [
+        {
+          "symbol": "AAPL"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_stock_price",
+          "valid": true,
+          "details": {
+            "symbol": {
+              "valid": true,
+              "reason": "matches regex '(?i)aapl'",
+              "actual": "AAPL"
+            }
+          },
+          "actual_args": {
+            "symbol": "AAPL"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "Set a reminder to call mom at 3pm",
+      "description": "Reminder setting",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "set_reminder"
+      ],
+      "tool_args": [
+        {
+          "message": "Call mom",
+          "time": "3:00 PM"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "set_reminder",
+          "valid": true,
+          "details": {
+            "message": {
+              "valid": true,
+              "reason": "matches regex '(?i)call.*mom|mom'",
+              "actual": "Call mom"
+            },
+            "time": {
+              "valid": true,
+              "reason": "matches regex '(?i)3|pm|15'",
+              "actual": "3:00 PM"
+            }
+          },
+          "actual_args": {
+            "message": "Call mom",
+            "time": "3:00 PM"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "single",
+      "query": "Search for machine learning papers on arxiv",
+      "description": "Academic search query",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "search_web"
+      ],
+      "tool_args": [
+        {
+          "query": "machine learning papers on arxiv"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "search_web",
+          "valid": true,
+          "details": {
+            "query": {
+              "valid": true,
+              "reason": "matches regex '(?i)machine.?learning|arxiv'",
+              "actual": "machine learning papers on arxiv"
+            }
+          },
+          "actual_args": {
+            "query": "machine learning papers on arxiv"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "What's the weather in Seoul and New York?",
+      "description": "2 cities weather (same tool)",
+      "success": true,
+      "tool_calls_count": 2,
+      "tool_names": [
+        "get_weather",
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Seoul"
+        },
+        {
+          "city": "New York"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "Seoul"
+            }
+          },
+          "actual_args": {
+            "city": "Seoul"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "New York"
+            }
+          },
+          "actual_args": {
+            "city": "New York"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "Read config.json and settings.json",
+      "description": "2 files read (same tool)",
+      "success": true,
+      "tool_calls_count": 2,
+      "tool_names": [
+        "read_file",
+        "read_file"
+      ],
+      "tool_args": [
+        {
+          "path": "config.json"
+        },
+        {
+          "path": "settings.json"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "read_file",
+          "valid": true,
+          "details": {
+            "path": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "config.json"
+            }
+          },
+          "actual_args": {
+            "path": "config.json"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "read_file",
+          "valid": true,
+          "details": {
+            "path": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "settings.json"
+            }
+          },
+          "actual_args": {
+            "path": "settings.json"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "To read the contents of `config.json` and `settings.json`, you can use the `read_file` function. Here are the calls to read both files:",
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "Search for Python tutorials and JavaScript tutorials",
+      "description": "2 web searches (same tool)",
+      "success": true,
+      "tool_calls_count": 2,
+      "tool_names": [
+        "search_web",
+        "search_web"
+      ],
+      "tool_args": [
+        {
+          "query": "Python tutorials"
+        },
+        {
+          "query": "JavaScript tutorials"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "search_web",
+          "valid": true,
+          "details": {
+            "query": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "Python tutorials"
+            }
+          },
+          "actual_args": {
+            "query": "Python tutorials"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "search_web",
+          "valid": true,
+          "details": {
+            "query": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "JavaScript tutorials"
+            }
+          },
+          "actual_args": {
+            "query": "JavaScript tutorials"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "Get stock prices for AAPL and GOOGL",
+      "description": "2 stock queries (same tool)",
+      "success": true,
+      "tool_calls_count": 2,
+      "tool_names": [
+        "get_stock_price",
+        "get_stock_price"
+      ],
+      "tool_args": [
+        {
+          "symbol": "AAPL"
+        },
+        {
+          "symbol": "GOOGL"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_stock_price",
+          "valid": true,
+          "details": {
+            "symbol": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "AAPL"
+            }
+          },
+          "actual_args": {
+            "symbol": "AAPL"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "get_stock_price",
+          "valid": true,
+          "details": {
+            "symbol": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "GOOGL"
+            }
+          },
+          "actual_args": {
+            "symbol": "GOOGL"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "What's the weather in Seoul, Tokyo, and London?",
+      "description": "3 cities weather",
+      "success": true,
+      "tool_calls_count": 3,
+      "tool_names": [
+        "get_weather",
+        "get_weather",
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Seoul"
+        },
+        {
+          "city": "Tokyo"
+        },
+        {
+          "city": "London"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "Seoul"
+            }
+          },
+          "actual_args": {
+            "city": "Seoul"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "Tokyo"
+            }
+          },
+          "actual_args": {
+            "city": "Tokyo"
+          }
+        },
+        {
+          "index": 2,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "London"
+            }
+          },
+          "actual_args": {
+            "city": "London"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "Read package.json, tsconfig.json, and .eslintrc.json",
+      "description": "3 files read",
+      "success": true,
+      "tool_calls_count": 3,
+      "tool_names": [
+        "read_file",
+        "read_file",
+        "read_file"
+      ],
+      "tool_args": [
+        {
+          "path": "package.json"
+        },
+        {
+          "path": "tsconfig.json"
+        },
+        {
+          "path": ".eslintrc.json"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "read_file",
+          "valid": true,
+          "details": {
+            "path": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "package.json"
+            }
+          },
+          "actual_args": {
+            "path": "package.json"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "read_file",
+          "valid": true,
+          "details": {
+            "path": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "tsconfig.json"
+            }
+          },
+          "actual_args": {
+            "path": "tsconfig.json"
+          }
+        },
+        {
+          "index": 2,
+          "tool": "read_file",
+          "valid": true,
+          "details": {
+            "path": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": ".eslintrc.json"
+            }
+          },
+          "actual_args": {
+            "path": ".eslintrc.json"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "To read the contents of `package.json`, `tsconfig.json`, and `.eslintrc.json`, you can use the `read_file` function. Here are the calls:",
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "What's the weather in Seoul and search for Korean restaurants nearby",
+      "description": "Weather + search (different tools)",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Seoul"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'Seoul'",
+              "actual": "Seoul"
+            }
+          },
+          "actual_args": {
+            "city": "Seoul"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "To get the weather in Seoul, we'll use the `get_weather` function. To search for Korean restaurants nearby, we'll use the `search_web` function. Please provide a location or zip code for the restaurant search.",
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "Calculate 25% of 80 and translate the result to Spanish",
+      "description": "Calculate + translate (different tools)",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "calculate"
+      ],
+      "tool_args": [
+        {
+          "expression": "0.25 * 80"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "calculate",
+          "valid": true,
+          "details": {
+            "expression": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "0.25 * 80"
+            }
+          },
+          "actual_args": {
+            "expression": "0.25 * 80"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "First, let's calculate 25% of 80:\n\n\n\nOnce we have the result, I'll translate it to Spanish.",
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "Get TSLA stock price and search for Tesla news",
+      "description": "Stock + search (different tools)",
+      "success": true,
+      "tool_calls_count": 2,
+      "tool_names": [
+        "get_stock_price",
+        "search_web"
+      ],
+      "tool_args": [
+        {
+          "symbol": "TSLA"
+        },
+        {
+          "query": "Tesla news"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_stock_price",
+          "valid": true,
+          "details": {
+            "symbol": {
+              "valid": true,
+              "reason": "matches regex '(?i)tsla'",
+              "actual": "TSLA"
+            }
+          },
+          "actual_args": {
+            "symbol": "TSLA"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "search_web",
+          "valid": true,
+          "details": {
+            "query": {
+              "valid": true,
+              "reason": "matches regex '(?i)tesla|tsla'",
+              "actual": "Tesla news"
+            }
+          },
+          "actual_args": {
+            "query": "Tesla news"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "To get the current stock price for Tesla (TSLA) and search for recent news about Tesla, you can use the following function calls:",
+      "error": null
+    },
+    {
+      "category": "parallel",
+      "query": "What's the weather in New York, Los Angeles, Chicago, and Miami?",
+      "description": "4 cities weather",
+      "success": true,
+      "tool_calls_count": 4,
+      "tool_names": [
+        "get_weather",
+        "get_weather",
+        "get_weather",
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "New York"
+        },
+        {
+          "city": "Los Angeles"
+        },
+        {
+          "city": "Chicago"
+        },
+        {
+          "city": "Miami"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "New York"
+            }
+          },
+          "actual_args": {
+            "city": "New York"
+          }
+        },
+        {
+          "index": 1,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "Los Angeles"
+            }
+          },
+          "actual_args": {
+            "city": "Los Angeles"
+          }
+        },
+        {
+          "index": 2,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "Chicago"
+            }
+          },
+          "actual_args": {
+            "city": "Chicago"
+          }
+        },
+        {
+          "index": 3,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "Miami"
+            }
+          },
+          "actual_args": {
+            "city": "Miami"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Send an email to john@example.com with subject 'Meeting Update' and body 'The meeting is rescheduled.\nPlease confirm your attendance.\nThank you.'",
+      "description": "Email with newlines in body",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "send_email"
+      ],
+      "tool_args": [
+        {
+          "to": "john@example.com",
+          "subject": "Meeting Update",
+          "body": "The meeting is rescheduled.\nPlease confirm your attendance.\nThank you."
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "send_email",
+          "valid": true,
+          "details": {
+            "to": {
+              "valid": true,
+              "reason": "contains 'john@example.com'",
+              "actual": "john@example.com"
+            },
+            "subject": {
+              "valid": true,
+              "reason": "matches regex '(?i)meeting'",
+              "actual": "Meeting Update"
+            },
+            "body": {
+              "valid": true,
+              "reason": "exists (required)",
+              "actual": "The meeting is rescheduled.\nPlease confirm your attendance.\nThank you."
+            }
+          },
+          "actual_args": {
+            "to": "john@example.com",
+            "subject": "Meeting Update",
+            "body": "The meeting is rescheduled.\nPlease confirm your attendance.\nThank you."
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Translate this to Japanese: 'Hello! Please say \"nice to meet you\".'",
+      "description": "Text with nested quotes",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "translate"
+      ],
+      "tool_args": [
+        {
+          "text": "Hello! Please say 'nice to meet you'.",
+          "target_language": "Japanese"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "translate",
+          "valid": true,
+          "details": {
+            "text": {
+              "valid": true,
+              "reason": "contains 'Hello'",
+              "actual": "Hello! Please say 'nice to meet you'."
+            },
+            "target_language": {
+              "valid": true,
+              "reason": "matches regex '(?i)japanese|ja'",
+              "actual": "Japanese"
+            }
+          },
+          "actual_args": {
+            "text": "Hello! Please say 'nice to meet you'.",
+            "target_language": "Japanese"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Search for 'C++ vs C#: pros & cons'",
+      "description": "Query with special chars (++, #, &)",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "search_web"
+      ],
+      "tool_args": [
+        {
+          "query": "C++ vs C#: pros & cons"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "search_web",
+          "valid": true,
+          "details": {
+            "query": {
+              "valid": true,
+              "reason": "matches regex 'C\\+\\+|C#'",
+              "actual": "C++ vs C#: pros & cons"
+            }
+          },
+          "actual_args": {
+            "query": "C++ vs C#: pros & cons"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Translate '你好世界' to English",
+      "description": "Chinese characters in argument",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "translate"
+      ],
+      "tool_args": [
+        {
+          "text": "你好世界",
+          "target_language": "en"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "translate",
+          "valid": true,
+          "details": {
+            "text": {
+              "valid": true,
+              "reason": "contains '你好'",
+              "actual": "你好世界"
+            },
+            "target_language": {
+              "valid": true,
+              "reason": "matches regex '(?i)english|en'",
+              "actual": "en"
+            }
+          },
+          "actual_args": {
+            "text": "你好世界",
+            "target_language": "en"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Translate 'こんにちは' to English",
+      "description": "Japanese characters in argument",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "translate"
+      ],
+      "tool_args": [
+        {
+          "text": "こんにちは",
+          "target_language": "en"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "translate",
+          "valid": true,
+          "details": {
+            "text": {
+              "valid": true,
+              "reason": "contains 'こんにちは'",
+              "actual": "こんにちは"
+            },
+            "target_language": {
+              "valid": true,
+              "reason": "matches regex '(?i)english|en'",
+              "actual": "en"
+            }
+          },
+          "actual_args": {
+            "text": "こんにちは",
+            "target_language": "en"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Translate '🎉 Congratulations! 🎊' to French",
+      "description": "Emoji in argument",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "translate"
+      ],
+      "tool_args": [
+        {
+          "text": "🎉 Congratulations! 🎊",
+          "target_language": "French"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "translate",
+          "valid": true,
+          "details": {
+            "text": {
+              "valid": true,
+              "reason": "contains 'Congratulations'",
+              "actual": "🎉 Congratulations! 🎊"
+            },
+            "target_language": {
+              "valid": true,
+              "reason": "matches regex '(?i)french|fr'",
+              "actual": "French"
+            }
+          },
+          "actual_args": {
+            "text": "🎉 Congratulations! 🎊",
+            "target_language": "French"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Translate the following paragraph to German: 'The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.'",
+      "description": "Long text argument",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "translate"
+      ],
+      "tool_args": [
+        {
+          "text": "The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.",
+          "target_language": "de"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "translate",
+          "valid": true,
+          "details": {
+            "text": {
+              "valid": true,
+              "reason": "contains 'quick brown fox'",
+              "actual": "The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice."
+            },
+            "target_language": {
+              "valid": true,
+              "reason": "matches regex '(?i)german|de'",
+              "actual": "de"
+            }
+          },
+          "actual_args": {
+            "text": "The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.",
+            "target_language": "de"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Write to output.json the content: {\"name\": \"test\", \"value\": 123}",
+      "description": "JSON content in argument",
+      "success": false,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "<tools>\n{\"name\": \"write_file\", \"arguments\": {\"path\": \"output.json\", \"content\": \"{\\\"name\\\": \\\"test\\\", \\\"value\\\": 123}\"}}}\n</tools>",
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Read the file at '/home/user/my documents/report.txt'",
+      "description": "File path with spaces",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "read_file"
+      ],
+      "tool_args": [
+        {
+          "path": "/home/user/my documents/report.txt"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "read_file",
+          "valid": true,
+          "details": {
+            "path": {
+              "valid": true,
+              "reason": "contains 'my documents'",
+              "actual": "/home/user/my documents/report.txt"
+            }
+          },
+          "actual_args": {
+            "path": "/home/user/my documents/report.txt"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "complex_args",
+      "query": "Create a calendar event titled 'Team Sync: Q1 Review 📊' starting at '2024-01-15 10:00 AM' ending at '2024-01-15 11:30 AM' at 'Conference Room A (2nd Floor)'",
+      "description": "Event with emoji, colon, parentheses",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "create_calendar_event"
+      ],
+      "tool_args": [
+        {
+          "title": "Team Sync: Q1 Review 📊",
+          "start_time": "2024-01-15 10:00 AM",
+          "end_time": "2024-01-15 11:30 AM",
+          "location": "Conference Room A (2nd Floor)"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "create_calendar_event",
+          "valid": true,
+          "details": {
+            "title": {
+              "valid": true,
+              "reason": "contains 'Team Sync'",
+              "actual": "Team Sync: Q1 Review 📊"
+            },
+            "start_time": {
+              "valid": true,
+              "reason": "contains '2024-01-15'",
+              "actual": "2024-01-15 10:00 AM"
+            },
+            "end_time": {
+              "valid": true,
+              "reason": "contains '2024-01-15'",
+              "actual": "2024-01-15 11:30 AM"
+            }
+          },
+          "actual_args": {
+            "title": "Team Sync: Q1 Review 📊",
+            "start_time": "2024-01-15 10:00 AM",
+            "end_time": "2024-01-15 11:30 AM",
+            "location": "Conference Room A (2nd Floor)"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "Weather Seoul",
+      "description": "Minimal query (no full sentence)",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Seoul"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'Seoul'",
+              "actual": "Seoul"
+            }
+          },
+          "actual_args": {
+            "city": "Seoul"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "Tokyo",
+      "description": "Single word city (ambiguous)",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Tokyo"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'Tokyo'",
+              "actual": "Tokyo"
+            }
+          },
+          "actual_args": {
+            "city": "Tokyo"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "Waht's the weather in Paris?",
+      "description": "Query with typo",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Paris"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'Paris'",
+              "actual": "Paris"
+            }
+          },
+          "actual_args": {
+            "city": "Paris"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "It looks like there was a small typo in your question. Did you mean \"What's the weather in Paris?\"?\n\nIf so, here is the request:",
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "서울 weather 알려줘",
+      "description": "Mixed Korean-English query",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Seoul"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "matches regex '(?i)seoul|서울'",
+              "actual": "Seoul"
+            }
+          },
+          "actual_args": {
+            "city": "Seoul"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "I need to know if I should bring an umbrella in London tomorrow",
+      "description": "Indirect weather request",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "London"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'London'",
+              "actual": "London"
+            }
+          },
+          "actual_args": {
+            "city": "London"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "To determine if you should bring an umbrella in London tomorrow, I'll check the weather forecast for London.",
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "What's (200 * 0.15) + 50?",
+      "description": "Compound math expression",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "calculate"
+      ],
+      "tool_args": [
+        {
+          "expression": "(200 * 0.15) + 50"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "calculate",
+          "valid": true,
+          "details": {
+            "expression": {
+              "valid": true,
+              "reason": "contains '200'",
+              "actual": "(200 * 0.15) + 50"
+            }
+          },
+          "actual_args": {
+            "expression": "(200 * 0.15) + 50"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "I'm planning a trip. What's the weather like in Barcelona?",
+      "description": "Query with conversational context",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Barcelona"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "contains 'Barcelona'",
+              "actual": "Barcelona"
+            }
+          },
+          "actual_args": {
+            "city": "Barcelona"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "Could you please search for the best restaurants in San Francisco?",
+      "description": "Polite phrasing",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "search_web"
+      ],
+      "tool_args": [
+        {
+          "query": "best restaurants in San Francisco"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "search_web",
+          "valid": true,
+          "details": {
+            "query": {
+              "valid": true,
+              "reason": "matches regex '(?i)restaurant|san.?francisco'",
+              "actual": "best restaurants in San Francisco"
+            }
+          },
+          "actual_args": {
+            "query": "best restaurants in San Francisco"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "URGENT: Get me the stock price for NVDA right now!",
+      "description": "Urgent tone request",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_stock_price"
+      ],
+      "tool_args": [
+        {
+          "symbol": "NVDA"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_stock_price",
+          "valid": true,
+          "details": {
+            "symbol": {
+              "valid": true,
+              "reason": "matches regex '(?i)nvda'",
+              "actual": "NVDA"
+            }
+          },
+          "actual_args": {
+            "symbol": "NVDA"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": null,
+      "error": null
+    },
+    {
+      "category": "edge_cases",
+      "query": "Should I check the weather in Berlin or Munich? Let's go with Berlin.",
+      "description": "Self-answered choice",
+      "success": true,
+      "tool_calls_count": 1,
+      "tool_names": [
+        "get_weather"
+      ],
+      "tool_args": [
+        {
+          "city": "Berlin"
+        }
+      ],
+      "args_validation": [
+        {
+          "index": 0,
+          "tool": "get_weather",
+          "valid": true,
+          "details": {
+            "city": {
+              "valid": true,
+              "reason": "matches regex '(?i)berlin|munich'",
+              "actual": "Berlin"
+            }
+          },
+          "actual_args": {
+            "city": "Berlin"
+          }
+        }
+      ],
+      "parse_errors": [],
+      "content": "Sure, let's check the weather in Berlin:",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "Hello!",
+      "description": "Greeting",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "Hello! How can I assist you today?",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "Who are you?",
+      "description": "Identity question",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "I'm an AI assistant designed to help with a variety of tasks, including answering questions, providing code reviews, and offering guidance on software development best practices. How can I assist you today?",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "I'm feeling great today!",
+      "description": "Casual conversation",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "That's wonderful to hear! Is there anything specific you'd like to talk about or any tasks you need assistance with?",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "Thank you for your help!",
+      "description": "Gratitude expression",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "You're welcome! If you have any more questions or need further assistance, feel free to ask.",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "What's your favorite color?",
+      "description": "Personal preference question (about assistant)",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "As an AI, I don't have personal preferences or feelings, so I don't have a favorite color. However, I can help you with information or recommendations related to colors if you need!",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "Tell me a joke",
+      "description": "Entertainment request",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "Sure, here's a light-hearted joke for you:\n\nWhy don't scientists trust atoms?\n\nBecause they make up everything!",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "What programming languages are you good at?",
+      "description": "Capability question (about assistant)",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "I am proficient in several programming languages, including:\n\n- **Python**: Ideal for scripting, automation, and web development.\n- **TypeScript**: Used for building robust web applications, especially with frameworks like React.\n- **Go**: Known for its simplicity, efficiency, and suitability for systems programming.\n- **Rust**: Offers strong memory safety guarantees and is great for performance-critical applications.\n\nEach language has its own strengths and is suited to different types of projects. If you need assistance with any of these or others, feel free to ask!",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "How are you doing today?",
+      "description": "Asking about assistant's state",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "I'm here and ready to help you with any questions or tasks you have! How can I assist you today?",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "What can you do?",
+      "description": "Capability question",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "I can assist with a variety of tasks, including:\n\n1. **Code Review**: Analyze and provide feedback on code correctness, performance, security, design, and test coverage.\n2. **Implementation**: Help implement features following best practices and idiomatic coding styles.\n3. **System Design**: Discuss and recommend architectural decisions considering scalability, consistency, availability, data stores, observability, and failure modes.\n4. **Real-time Data**: Access and provide information through various tools like getting weather, searching the web, performing calculations, translating text, sending emails, reading/writing files, getting stock prices, setting reminders, and creating calendar events.\n\nFeel free to ask me anything specific you need help with!",
+      "error": null
+    },
+    {
+      "category": "no_tool",
+      "query": "Goodbye!",
+      "description": "Farewell",
+      "success": true,
+      "tool_calls_count": 0,
+      "tool_names": [],
+      "tool_args": [],
+      "args_validation": null,
+      "parse_errors": [],
+      "content": "Goodbye! If you have any more questions in the future, feel free to ask. Have a great day!",
+      "error": null
+    }
+  ]
+}

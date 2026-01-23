@@ -1,0 +1,144 @@
+# Test tools for vLLM qwen2_5_coder parser integration tests
+# These tools are designed to cover common use cases and edge cases
+
+tools:
+  - name: get_weather
+    description: Get the current weather for a city
+    parameters:
+      type: object
+      properties:
+        city:
+          type: string
+          description: City name
+      required:
+        - city
+
+  - name: search_web
+    description: Search the web for information
+    parameters:
+      type: object
+      properties:
+        query:
+          type: string
+          description: Search query
+      required:
+        - query
+
+  - name: calculate
+    description: Perform mathematical calculations
+    parameters:
+      type: object
+      properties:
+        expression:
+          type: string
+          description: Math expression to evaluate
+      required:
+        - expression
+
+  - name: translate
+    description: Translate text to another language
+    parameters:
+      type: object
+      properties:
+        text:
+          type: string
+          description: Text to translate
+        target_language:
+          type: string
+          description: Target language
+      required:
+        - text
+        - target_language
+
+  - name: send_email
+    description: Send an email
+    parameters:
+      type: object
+      properties:
+        to:
+          type: string
+          description: Recipient email address
+        subject:
+          type: string
+          description: Email subject
+        body:
+          type: string
+          description: Email body content
+      required:
+        - to
+        - subject
+        - body
+
+  - name: read_file
+    description: Read contents of a file
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: File path to read
+      required:
+        - path
+
+  - name: write_file
+    description: Write contents to a file
+    parameters:
+      type: object
+      properties:
+        path:
+          type: string
+          description: File path to write
+        content:
+          type: string
+          description: Content to write
+      required:
+        - path
+        - content
+
+  - name: get_stock_price
+    description: Get the current stock price for a ticker symbol
+    parameters:
+      type: object
+      properties:
+        symbol:
+          type: string
+          description: Stock ticker symbol (e.g., AAPL, GOOGL)
+      required:
+        - symbol
+
+  - name: set_reminder
+    description: Set a reminder for a specific time
+    parameters:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Reminder message
+        time:
+          type: string
+          description: Time for the reminder (e.g., "3:00 PM", "tomorrow 9am")
+      required:
+        - message
+        - time
+
+  - name: create_calendar_event
+    description: Create a calendar event
+    parameters:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Event title
+        start_time:
+          type: string
+          description: Event start time
+        end_time:
+          type: string
+          description: Event end time
+        location:
+          type: string
+          description: Event location (optional)
+      required:
+        - title
+        - start_time
+        - end_time

@@ -1,0 +1,394 @@
+# Test cases for vLLM qwen2_5_coder parser integration tests
+#
+# Categories:
+#   - single: Single tool call (basic parsing)
+#   - parallel: Multiple tool calls in one response (multi-object parsing)
+#   - complex_args: Complex arguments (newlines, quotes, unicode, special chars)
+#   - edge_cases: Edge cases for parser robustness (typos, minimal input, etc.)
+#   - no_tool: Should NOT trigger tool calling (side-effect detection)
+#
+# Success criteria:
+#   - single/parallel/complex_args/edge_cases:
+#     Parser produced valid tool_calls (valid JSON args, valid function name).
+#     arg_checks validates argument values per selected tool.
+#   - no_tool:
+#     Model produced normal text (no tool_calls).
+#     If tool was unexpectedly called, still check parsing validity.
+#
+# arg_checks:
+#   Per-tool argument validation patterns.
+#   Maps tool_name -> {arg_name: pattern} for each tool that could reasonably
+#   be selected for the query. When the model selects a tool, its args are
+#   validated against the matching entry.
+#   If the selected tool has no entry in arg_checks, only JSON validity is checked.
+#
+# Pattern types:
+#   - Exact match: {city: "Seoul"} - argument must equal this value
+#   - Contains: {city: {contains: "Seoul"}} - argument must contain substring
+#   - Regex: {city: {regex: "^[Ss]eoul$"}} - argument must match regex
+#   - Required: {city: {required: true}} - argument must exist (any value)
+#
+# Example:
+#   - query: "What's the weather in Seoul?"
+#     arg_checks:
+#       get_weather:                        # If model chose get_weather
+#         city: {contains: "Seoul"}         #   city arg must contain "Seoul"
+#       search_web:                         # If model chose search_web instead
+#         query: {contains: "Seoul"}        #   query arg must contain "Seoul"
+
+# =============================================================================
+# SINGLE TOOL CALL TESTS
+# =============================================================================
+# Basic single tool call parsing.
+
+single:
+  - query: "What's the weather in Seoul?"
+    arg_checks:
+      get_weather:
+        city: {contains: "Seoul"}
+      search_web:
+        query: {contains: "Seoul"}
+    description: "Basic weather query"
+
+  - query: "What's the current temperature in New York?"
+    arg_checks:
+      get_weather:
+        city: {contains: "New York"}
+      search_web:
+        query: {contains: "New York"}
+    description: "Weather query with different phrasing"
+
+  - query: "Search for Python async programming tutorials"
+    arg_checks:
+      search_web:
+        query: {regex: "(?i)python|async"}
+    description: "Web search query"
+
+  - query: "Calculate 15% tip on $45"
+    arg_checks:
+      calculate:
+        expression: {required: true}
+    description: "Calculation with percentage"
+
+  - query: "What is 1234 * 5678?"
+    arg_checks:
+      calculate:
+        expression: {contains: "1234"}
+    description: "Basic multiplication"
+
+  - query: "Translate 'Hello world' to Korean"
+    arg_checks:
+      translate:
+        text: {contains: "Hello"}
+        target_language: {regex: "(?i)korean|ko"}
+    description: "Translation request"
+
+  - query: "Read the contents of config.json"
+    arg_checks:
+      read_file:
+        path: {contains: "config.json"}
+    description: "File read request"
+
+  - query: "What's the stock price of AAPL?"
+    arg_checks:
+      get_stock_price:
+        symbol: {regex: "(?i)aapl"}
+      search_web:
+        query: {regex: "(?i)aapl|stock"}
+    description: "Stock price query"
+
+  - query: "Set a reminder to call mom at 3pm"
+    arg_checks:
+      set_reminder:
+        message: {regex: "(?i)call.*mom|mom"}
+        time: {regex: "(?i)3|pm|15"}
+    description: "Reminder setting"
+
+  - query: "Search for machine learning papers on arxiv"
+    arg_checks:
+      search_web:
+        query: {regex: "(?i)machine.?learning|arxiv"}
+    description: "Academic search query"
+
+# =============================================================================
+# PARALLEL TOOL CALL TESTS
+# =============================================================================
+# Multiple tool calls in one response (multi-object JSON parsing).
+
+parallel:
+  # 2 calls - same tool
+  - query: "What's the weather in Seoul and New York?"
+    arg_checks:
+      get_weather:
+        city: {required: true}
+      search_web:
+        query: {required: true}
+    description: "2 cities weather (same tool)"
+
+  - query: "Read config.json and settings.json"
+    arg_checks:
+      read_file:
+        path: {required: true}
+    description: "2 files read (same tool)"
+
+  - query: "Search for Python tutorials and JavaScript tutorials"
+    arg_checks:
+      search_web:
+        query: {required: true}
+    description: "2 web searches (same tool)"
+
+  - query: "Get stock prices for AAPL and GOOGL"
+    arg_checks:
+      get_stock_price:
+        symbol: {required: true}
+      search_web:
+        query: {required: true}
+    description: "2 stock queries (same tool)"
+
+  # 3 calls - same tool
+  - query: "What's the weather in Seoul, Tokyo, and London?"
+    arg_checks:
+      get_weather:
+        city: {required: true}
+      search_web:
+        query: {required: true}
+    description: "3 cities weather"
+
+  - query: "Read package.json, tsconfig.json, and .eslintrc.json"
+    arg_checks:
+      read_file:
+        path: {required: true}
+    description: "3 files read"
+
+  # 2 calls - different tools
+  - query: "What's the weather in Seoul and search for Korean restaurants nearby"
+    arg_checks:
+      get_weather:
+        city: {contains: "Seoul"}
+      search_web:
+        query: {regex: "(?i)korean|restaurant|seoul"}
+    description: "Weather + search (different tools)"
+
+  - query: "Calculate 25% of 80 and translate the result to Spanish"
+    arg_checks:
+      calculate:
+        expression: {required: true}
+      translate:
+        target_language: {regex: "(?i)spanish|es"}
+    description: "Calculate + translate (different tools)"
+
+  - query: "Get TSLA stock price and search for Tesla news"
+    arg_checks:
+      get_stock_price:
+        symbol: {regex: "(?i)tsla"}
+      search_web:
+        query: {regex: "(?i)tesla|tsla"}
+    description: "Stock + search (different tools)"
+
+  # 4 calls
+  - query: "What's the weather in New York, Los Angeles, Chicago, and Miami?"
+    arg_checks:
+      get_weather:
+        city: {required: true}
+      search_web:
+        query: {required: true}
+    description: "4 cities weather"
+
+# =============================================================================
+# COMPLEX ARGUMENTS TESTS
+# =============================================================================
+# Complex argument values: newlines, quotes, unicode, special characters.
+
+complex_args:
+  - query: "Send an email to john@example.com with subject 'Meeting Update' and body 'The meeting is rescheduled.\nPlease confirm your attendance.\nThank you.'"
+    arg_checks:
+      send_email:
+        to: {contains: "john@example.com"}
+        subject: {regex: "(?i)meeting"}
+        body: {required: true}
+    description: "Email with newlines in body"
+
+  - query: "Translate this to Japanese: 'Hello! Please say \"nice to meet you\".'"
+    arg_checks:
+      translate:
+        text: {contains: "Hello"}
+        target_language: {regex: "(?i)japanese|ja"}
+    description: "Text with nested quotes"
+
+  - query: "Search for 'C++ vs C#: pros & cons'"
+    arg_checks:
+      search_web:
+        query: {regex: "C\\+\\+|C#"}
+    description: "Query with special chars (++, #, &)"
+
+  - query: "Translate '你好世界' to English"
+    arg_checks:
+      translate:
+        text: {contains: "你好"}
+        target_language: {regex: "(?i)english|en"}
+    description: "Chinese characters in argument"
+
+  - query: "Translate 'こんにちは' to English"
+    arg_checks:
+      translate:
+        text: {contains: "こんにちは"}
+        target_language: {regex: "(?i)english|en"}
+    description: "Japanese characters in argument"
+
+  - query: "Translate '🎉 Congratulations! 🎊' to French"
+    arg_checks:
+      translate:
+        text: {contains: "Congratulations"}
+        target_language: {regex: "(?i)french|fr"}
+    description: "Emoji in argument"
+
+  - query: "Translate the following paragraph to German: 'The quick brown fox jumps over the lazy dog. This sentence contains every letter of the English alphabet and is commonly used for font testing and typing practice.'"
+    arg_checks:
+      translate:
+        text: {contains: "quick brown fox"}
+        target_language: {regex: "(?i)german|de"}
+    description: "Long text argument"
+
+  - query: "Write to output.json the content: {\"name\": \"test\", \"value\": 123}"
+    arg_checks:
+      write_file:
+        path: {contains: "output.json"}
+        content: {contains: "name"}
+    description: "JSON content in argument"
+
+  - query: "Read the file at '/home/user/my documents/report.txt'"
+    arg_checks:
+      read_file:
+        path: {contains: "my documents"}
+    description: "File path with spaces"
+
+  - query: "Create a calendar event titled 'Team Sync: Q1 Review 📊' starting at '2024-01-15 10:00 AM' ending at '2024-01-15 11:30 AM' at 'Conference Room A (2nd Floor)'"
+    arg_checks:
+      create_calendar_event:
+        title: {contains: "Team Sync"}
+        start_time: {contains: "2024-01-15"}
+        end_time: {contains: "2024-01-15"}
+    description: "Event with emoji, colon, parentheses"
+
+# =============================================================================
+# EDGE CASES TESTS
+# =============================================================================
+# Edge cases for parser robustness: typos, minimal input, mixed languages.
+
+edge_cases:
+  - query: "Weather Seoul"
+    arg_checks:
+      get_weather:
+        city: {contains: "Seoul"}
+      search_web:
+        query: {contains: "Seoul"}
+    description: "Minimal query (no full sentence)"
+
+  - query: "Tokyo"
+    arg_checks:
+      get_weather:
+        city: {contains: "Tokyo"}
+      search_web:
+        query: {contains: "Tokyo"}
+      translate:
+        text: {contains: "Tokyo"}
+    description: "Single word city (ambiguous)"
+
+  - query: "Waht's the weather in Paris?"
+    arg_checks:
+      get_weather:
+        city: {contains: "Paris"}
+      search_web:
+        query: {contains: "Paris"}
+    description: "Query with typo"
+
+  - query: "서울 weather 알려줘"
+    arg_checks:
+      get_weather:
+        city: {regex: "(?i)seoul|서울"}
+      search_web:
+        query: {regex: "(?i)seoul|서울|weather"}
+    description: "Mixed Korean-English query"
+
+  - query: "I need to know if I should bring an umbrella in London tomorrow"
+    arg_checks:
+      get_weather:
+        city: {contains: "London"}
+      search_web:
+        query: {contains: "London"}
+    description: "Indirect weather request"
+
+  - query: "What's (200 * 0.15) + 50?"
+    arg_checks:
+      calculate:
+        expression: {contains: "200"}
+    description: "Compound math expression"
+
+  - query: "I'm planning a trip. What's the weather like in Barcelona?"
+    arg_checks:
+      get_weather:
+        city: {contains: "Barcelona"}
+      search_web:
+        query: {contains: "Barcelona"}
+    description: "Query with conversational context"
+
+  - query: "Could you please search for the best restaurants in San Francisco?"
+    arg_checks:
+      search_web:
+        query: {regex: "(?i)restaurant|san.?francisco"}
+    description: "Polite phrasing"
+
+  - query: "URGENT: Get me the stock price for NVDA right now!"
+    arg_checks:
+      get_stock_price:
+        symbol: {regex: "(?i)nvda"}
+      search_web:
+        query: {regex: "(?i)nvda|stock"}
+    description: "Urgent tone request"
+
+  - query: "Should I check the weather in Berlin or Munich? Let's go with Berlin."
+    arg_checks:
+      get_weather:
+        city: {regex: "(?i)berlin|munich"}
+      search_web:
+        query: {regex: "(?i)berlin|munich|weather"}
+    description: "Self-answered choice"
+
+# =============================================================================
+# NO TOOL TESTS
+# =============================================================================
+# Queries that should NOT trigger tool calls.
+# Purpose: Verify the system prompt doesn't cause unintended tool calling
+# on normal conversational queries.
+# Success = no tool_calls in response. If tool was called, still check parsing.
+
+no_tool:
+  - query: "Hello!"
+    description: "Greeting"
+
+  - query: "Who are you?"
+    description: "Identity question"
+
+  - query: "I'm feeling great today!"
+    description: "Casual conversation"
+
+  - query: "Thank you for your help!"
+    description: "Gratitude expression"
+
+  - query: "What's your favorite color?"
+    description: "Personal preference question (about assistant)"
+
+  - query: "Tell me a joke"
+    description: "Entertainment request"
+
+  - query: "What programming languages are you good at?"
+    description: "Capability question (about assistant)"
+
+  - query: "How are you doing today?"
+    description: "Asking about assistant's state"
+
+  - query: "What can you do?"
+    description: "Capability question"
+
+  - query: "Goodbye!"
+    description: "Farewell"
