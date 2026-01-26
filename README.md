@@ -17,6 +17,8 @@ The solution is to prompt the model to use `<tools>` tags, which provide unambig
 
 Related issues: [vLLM #10952](https://github.com/vllm-project/vllm/issues/10952), [vLLM #29192](https://github.com/vllm-project/vllm/issues/29192)
 
+Upstream contribution: [Issue #32926](https://github.com/vllm-project/vllm/issues/32926), [PR #32931](https://github.com/vllm-project/vllm/pull/32931)
+
 ## Usage
 
 ```bash
