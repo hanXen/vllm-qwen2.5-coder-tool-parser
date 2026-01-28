@@ -209,12 +209,12 @@ Tested with a ~90-line system prompt (software development assistant with code s
 
 | Model | Parser Success | Tool Not Called | JSON Malformation |
 |-------|:--------------:|:---------------:|:-----------------:|
-| Qwen2.5-Coder-7B-Instruct | 35/36 (97.2%) | 4 | 1 |
-| Qwen2.5-Coder-14B-Instruct | 39/40 (97.5%) | 0 | 1 |
-| Qwen2.5-Coder-32B-Instruct-AWQ | 39/40 (97.5%) | 0 | 1 |
+| Qwen2.5-Coder-7B-Instruct | 45/46 (97.8%) | 4 | 1 |
+| Qwen2.5-Coder-14B-Instruct | 49/50 (98%) | 0 | 1 |
+| Qwen2.5-Coder-32B-Instruct-AWQ | 49/50 (98%) | 0 | 1 |
 
 - **Format induction**: 14B and 32B use `<tools>` tags 100% of the time even with a verbose system prompt. Few-shot examples are not buried by long instructions.
 - **JSON malformation**: The same "JSON-in-argument" case fails identically across all 3 models. This is a model-level JSON-in-JSON escaping limitation, not a parser issue.
-- **Tool not called (7B only)**: 7B does not call tools in 4/40 cases with verbose prompts, answering directly instead. This is model behavior degradation with long system prompts on smaller parameter models, not a parser issue.
+- **Tool not called (7B only)**: 7B does not call tools in 4 cases (out of 40 tool-calling tests; 10 no-tool tests excluded) with verbose prompts, answering directly instead. These are excluded from Parser Success denominator. This is model behavior degradation with long system prompts on smaller parameter models, not a parser issue.
 
 </details>
