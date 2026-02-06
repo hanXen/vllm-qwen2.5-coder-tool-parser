@@ -87,12 +87,8 @@ class Qwen25CoderToolParser(ToolParser):
             tool_calls: list[ToolCall] = []
             text_parts: list[str] = []
             last_end = 0
-            pattern = re.compile(
-                r"<tools>\s*(.*?)\s*</tools>|<tools>\s*(.*)",
-                re.DOTALL
-            )
 
-            for match in pattern.finditer(model_output):
+            for match in self.tool_call_regex.finditer(model_output):
                 if match.start() > last_end:
                     text_parts.append(model_output[last_end:match.start()])
 
@@ -172,29 +168,29 @@ class Qwen25CoderToolParser(ToolParser):
             prev_matches = list(pattern.finditer(previous_text))
 
             if len(current_matches) > len(prev_matches):
-                new_match = current_matches[-1]
-                json_str = new_match.group(1).strip()
-                parsed = self._parse_tool_json(json_str)
+                delta_tool_calls = []
+                for new_match in current_matches[len(prev_matches):]:
+                    json_str = new_match.group(1).strip()
+                    parsed = self._parse_tool_json(json_str)
 
-                if parsed:
-                    # May be array/JSONL format, return all tool calls
-                    delta_tool_calls = []
-                    for tool_data in parsed:
-                        self.current_tool_id += 1
-                        delta_tool_calls.append(
-                            DeltaToolCall(
-                                index=self.current_tool_id,
-                                id=f"tool_{self.current_tool_id}",
-                                type="function",
-                                function=DeltaFunctionCall(
-                                    name=tool_data["name"],
-                                    arguments=json.dumps(
-                                        tool_data.get("arguments", {}),
-                                        ensure_ascii=False
+                    if parsed:
+                        for tool_data in parsed:
+                            self.current_tool_id += 1
+                            delta_tool_calls.append(
+                                DeltaToolCall(
+                                    index=self.current_tool_id,
+                                    id=f"tool_{self.current_tool_id}",
+                                    type="function",
+                                    function=DeltaFunctionCall(
+                                        name=tool_data["name"],
+                                        arguments=json.dumps(
+                                            tool_data.get("arguments", {}),
+                                            ensure_ascii=False
+                                        ),
                                     ),
-                                ),
+                                )
                             )
-                        )
+                if delta_tool_calls:
                     return DeltaMessage(tool_calls=delta_tool_calls)
 
             # Inside an unclosed <tools> tag — buffer until closed
