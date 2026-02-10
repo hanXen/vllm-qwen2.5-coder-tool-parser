@@ -1,5 +1,7 @@
 # Qwen2.5-Coder `<tools>` Tag Parser for vLLM
 
+> Fixes Qwen 2.5 Coder tool calling (function calling) on vLLM, where `--tool-call-parser hermes` silently fails.
+
 A vLLM tool parser for Qwen2.5-Coder models that use `<tools>` tag format for tool calling.
 
 ## Problem
@@ -15,9 +17,15 @@ We tested several prompting strategies and found that hermes-style `<tool_call>`
 
 The solution is to prompt the model to use `<tools>` tags, which provide unambiguous start/end markers that vLLM can parse deterministically — just like hermes `<tool_call>` tags. The provided chat template automates this by injecting few-shot `<tools>` examples into the system prompt when tools are present in the API request.
 
-Related issues: [vLLM #10952](https://github.com/vllm-project/vllm/issues/10952), [vLLM #29192](https://github.com/vllm-project/vllm/issues/29192)
+> [!NOTE]
+> Being contributed upstream to vLLM — [Issue #32926](https://github.com/vllm-project/vllm/issues/32926) / [PR #32931](https://github.com/vllm-project/vllm/pull/32931).
+> Related issues: [#10952](https://github.com/vllm-project/vllm/issues/10952), [#29192](https://github.com/vllm-project/vllm/issues/29192).
 
-Upstream contribution: [Issue #32926](https://github.com/vllm-project/vllm/issues/32926), [PR #32931](https://github.com/vllm-project/vllm/pull/32931)
+## When to Use This
+
+- `tool_calls` array is empty when using Qwen2.5-Coder with `--tool-call-parser hermes`
+- Qwen2.5-Coder outputs tool calls as ` ```json ``` ` code blocks instead of structured `tool_calls`
+- Function calling works with Qwen2.5 (non-Coder) but fails on Qwen2.5-Coder
 
 ## Usage
 
