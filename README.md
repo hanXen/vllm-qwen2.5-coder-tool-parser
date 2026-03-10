@@ -37,6 +37,18 @@ vllm serve Qwen/Qwen2.5-Coder-7B-Instruct \
     --chat-template tool_chat_template_qwen2_5_coder.jinja
 ```
 
+### vLLM Compatibility
+
+> [!IMPORTANT]
+> vLLM v0.15.0 introduced internal API changes (`vllm.entrypoints.openai.protocol` split into submodules, `AnyTokenizer` renamed to `TokenizerLike`). If you see `ModuleNotFoundError: No module named 'vllm.entrypoints.openai.protocol'` or `ImportError: cannot import name 'AnyTokenizer'`, make sure you are using the latest version of this parser which includes compatibility fallbacks.
+>
+> If this parser breaks on a newer vLLM version, please let us know by [opening an issue](https://github.com/hanXen/vllm-qwen2.5-coder-tool-parser/issues).
+
+| vLLM Version | Internal API | Status |
+|:------------:|---------|:------:|
+| v0.7.x ~ v0.14.x | `vllm.entrypoints.openai.protocol`, `AnyTokenizer` | Tested (v0.14.0) |
+| v0.15.x ~ v0.17.x | `protocol` split into `chat_completion.protocol` + `engine.protocol`, `AnyTokenizer` → `TokenizerLike` | Tested (v0.17.0) |
+
 ## Supported Formats
 
 The parser handles all observed output patterns from Qwen2.5-Coder:

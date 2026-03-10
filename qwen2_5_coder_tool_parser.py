@@ -17,21 +17,42 @@ import re
 from collections.abc import Sequence
 from typing import Any
 
-from vllm.entrypoints.openai.protocol import (
-    ChatCompletionRequest,
-    DeltaFunctionCall,
-    DeltaMessage,
-    DeltaToolCall,
-    ExtractedToolCallInformation,
-    FunctionCall,
-    ToolCall,
-)
+try:
+    # vLLM >= 0.15.x (protocol split into submodules)
+    from vllm.entrypoints.openai.chat_completion.protocol import (
+        ChatCompletionRequest,
+    )
+    from vllm.entrypoints.openai.engine.protocol import (
+        DeltaFunctionCall,
+        DeltaMessage,
+        DeltaToolCall,
+        ExtractedToolCallInformation,
+        FunctionCall,
+        ToolCall,
+    )
+except ImportError:
+    # vLLM <= 0.14.x (single protocol module)
+    from vllm.entrypoints.openai.protocol import (  # type: ignore[no-redef]
+        ChatCompletionRequest,
+        DeltaFunctionCall,
+        DeltaMessage,
+        DeltaToolCall,
+        ExtractedToolCallInformation,
+        FunctionCall,
+        ToolCall,
+    )
 from vllm.logger import init_logger
 from vllm.tool_parsers.abstract_tool_parser import (
     ToolParser,
     ToolParserManager,
 )
-from vllm.transformers_utils.tokenizer import AnyTokenizer
+
+try:
+    # vLLM >= 0.15.x (AnyTokenizer renamed to TokenizerLike)
+    from vllm.tokenizers import TokenizerLike as AnyTokenizer
+except ImportError:
+    # vLLM <= 0.14.x
+    from vllm.transformers_utils.tokenizer import AnyTokenizer  # type: ignore[no-redef]
 
 logger = init_logger(__name__)
 
