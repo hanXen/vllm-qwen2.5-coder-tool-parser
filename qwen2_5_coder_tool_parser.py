@@ -65,8 +65,8 @@ class Qwen25CoderToolParser(ToolParser):
     Not applicable to Qwen2.5 (non-Coder) which uses hermes natively.
     """
 
-    def __init__(self, tokenizer: AnyTokenizer):
-        super().__init__(tokenizer)
+    def __init__(self, tokenizer: AnyTokenizer, tools=None):
+        super().__init__(tokenizer, tools)
 
         # <tools> tag tokens
         self.tool_call_start_token: str = "<tools>"
