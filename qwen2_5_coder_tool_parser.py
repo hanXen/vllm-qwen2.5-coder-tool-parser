@@ -80,6 +80,11 @@ class Qwen25CoderToolParser(ToolParser):
             r"<tools>\s*(.*?)\s*</tools>|<tools>\s*(.*)",
             re.DOTALL
         )
+        # Pattern: closed tags only (for streaming match counting)
+        self.tool_call_closed_regex = re.compile(
+            r"<tools>\s*(.*?)\s*</tools>",
+            re.DOTALL
+        )
 
     def extract_tool_calls(
         self,
@@ -184,9 +189,8 @@ class Qwen25CoderToolParser(ToolParser):
             return DeltaMessage(content=delta_text)
 
         try:
-            pattern = re.compile(r"<tools>\s*(.*?)\s*</tools>", re.DOTALL)
-            current_matches = list(pattern.finditer(current_text))
-            prev_matches = list(pattern.finditer(previous_text))
+            current_matches = list(self.tool_call_closed_regex.finditer(current_text))
+            prev_matches = list(self.tool_call_closed_regex.finditer(previous_text))
 
             if len(current_matches) > len(prev_matches):
                 delta_tool_calls = []
