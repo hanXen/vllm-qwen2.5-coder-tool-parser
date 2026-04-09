@@ -47,7 +47,8 @@ vllm serve Qwen/Qwen2.5-Coder-7B-Instruct \
 | vLLM Version | Internal API | Status |
 |:------------:|---------|:------:|
 | v0.7.x ~ v0.14.x | `vllm.entrypoints.openai.protocol`, `AnyTokenizer` | Tested (v0.14.0) |
-| v0.15.x ~ v0.17.x | `protocol` split into `chat_completion.protocol` + `engine.protocol`, `AnyTokenizer` → `TokenizerLike` | Tested (v0.17.0) |
+| v0.15.x ~ v0.18.x | `protocol` split into `chat_completion.protocol` + `engine.protocol`, `AnyTokenizer` → `TokenizerLike` | Tested (v0.17.0) |
+| v0.19.x | `ToolParser.__init__` now accepts `tools` parameter | Tested (v0.19.0), PR [#1](https://github.com/hanXen/vllm-qwen2.5-coder-tool-parser/pull/1) |
 
 ## Supported Formats
 
