@@ -66,7 +66,10 @@ class Qwen25CoderToolParser(ToolParser):
     """
 
     def __init__(self, tokenizer: AnyTokenizer, tools=None):
-        super().__init__(tokenizer, tools)
+        if tools is not None:
+            super().__init__(tokenizer, tools)
+        else:
+            super().__init__(tokenizer)
 
         # <tools> tag tokens
         self.tool_call_start_token: str = "<tools>"
