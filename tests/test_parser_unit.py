@@ -118,7 +118,7 @@ sys.modules["vllm.transformers_utils.tokenizer"] = mock_tokenizer
 
 # Now import the parser
 sys.path.insert(0, str(__import__("pathlib").Path(__file__).parent.parent))
-from qwen2_5_coder_tool_parser import Qwen25CoderToolParser  # noqa: E402  # pylint: disable=C0413
+from qwen2_5_coder_tool_parser import Qwen25CoderToolParser, _partial_tag_overlap  # noqa: E402  # pylint: disable=C0413
 
 
 # =============================================================================
@@ -555,6 +555,8 @@ class TestExtractToolCallsStreaming:
 
     # --- Before <tools> tag ---
     def test_no_tag_returns_content(self):
+        # Simulate sequential calls as vLLM does
+        self._call("", "Hello", "Hello")        # emit "Hello"
         result = self._call("Hello", "Hello world", " world")
         assert result is not None
         assert result.content == " world"
@@ -580,6 +582,7 @@ class TestExtractToolCallsStreaming:
 
     def test_tag_start_in_delta_after_text(self):
         """Delta contains the start of a tag after normal text."""
+        self._call("", "Hello ", "Hello ")       # emit "Hello "
         result = self._call("Hello ", "Hello <tools>", "<tools>")
         assert result is None
 
@@ -633,6 +636,17 @@ class TestExtractToolCallsStreaming:
         assert result is not None
         assert result.content == " Done!"
 
+    def test_trailing_text_in_same_delta_as_tool_close(self):
+        """}</tools> Done! in a single delta — trailing text must not be lost."""
+        prev = '<tools>{"name": "foo", "arguments": {"a": 1}'
+        curr = '<tools>{"name": "foo", "arguments": {"a": 1}}</tools> Done!'
+        delta = '}</tools> Done!'
+        result = self._call(prev, curr, delta)
+        assert result is not None
+        assert result.tool_calls is not None
+        assert result.tool_calls[0].function.name == "foo"
+        assert result.content == " Done!"
+
     # --- No new matches ---
     def test_no_new_match_inside_second_tag(self):
         """Inside second tag (buffering), return None."""
@@ -641,6 +655,107 @@ class TestExtractToolCallsStreaming:
         delta = ", "
         result = self._call(prev, curr, delta)
         assert result is None
+
+    # --- Partial <tools> prefix buffering ---
+    def test_partial_start_tag_buffered(self):
+        """Characters of a partial <tools> tag must NOT leak as content."""
+        base = "Hello "
+        tag = "<tools>"
+        emitted = []
+
+        prev = ""
+        for i, char in enumerate(base + tag):
+            curr = (base + tag)[: i + 1]
+            delta = char
+            result = self._call(prev, curr, delta)
+            if result is not None and result.content:
+                emitted.append(result.content)
+            prev = curr
+
+        joined = "".join(emitted)
+        assert "Hello " in joined
+        for ch_idx in range(1, len(tag)):
+            assert tag[:ch_idx] not in joined, (
+                f"partial prefix {tag[:ch_idx]!r} leaked as content"
+            )
+
+    def test_false_positive_prefix_flushed(self):
+        """A '<t' that turns out to be '<table>' must eventually be emitted."""
+        r1 = self._call("", "Hello <", "<")
+        content1 = r1.content if r1 else ""
+        r2 = self._call("Hello <", "Hello <t", "t")
+        content2 = r2.content if r2 else ""
+        r3 = self._call("Hello <t", "Hello <ta", "a")
+        content3 = r3.content if r3 else ""
+
+        total = content1 + content2 + content3
+        assert "<ta" in total or total.endswith("<ta")
+
+    def test_post_endtag_partial_start_buffered(self):
+        """After </tools>, second <tools> arriving char-by-char must not leak."""
+        completed = '<tools>{"name": "a", "arguments": {}}</tools>'
+        tag = "<tools>"
+        emitted = []
+
+        prev = completed
+        for i, char in enumerate(tag):
+            curr = completed + tag[: i + 1]
+            delta = char
+            result = self._call(prev, curr, delta)
+            if result is not None and result.content:
+                emitted.append(result.content)
+            prev = curr
+
+        joined = "".join(emitted)
+        for ch_idx in range(1, len(tag)):
+            assert tag[:ch_idx] not in joined, (
+                f"partial prefix {tag[:ch_idx]!r} leaked after </tools>"
+            )
+
+    def test_content_before_tools_tag_emitted(self):
+        """Text before <tools> should be fully emitted, tag itself should not."""
+        text = "Result: <tools>"
+        emitted = []
+
+        prev = ""
+        for i, char in enumerate(text):
+            curr = text[: i + 1]
+            delta = char
+            result = self._call(prev, curr, delta)
+            if result is not None and result.content:
+                emitted.append(result.content)
+            prev = curr
+
+        joined = "".join(emitted)
+        assert "Result: " in joined
+        assert "<tools>" not in joined
+
+
+# =============================================================================
+# Tests: _partial_tag_overlap helper
+# =============================================================================
+
+class TestPartialTagOverlap:
+    def test_no_overlap(self):
+        assert _partial_tag_overlap("hello", "<tools>") == 0
+
+    def test_single_char(self):
+        assert _partial_tag_overlap("hello<", "<tools>") == 1
+
+    def test_partial_prefix(self):
+        assert _partial_tag_overlap("hello<to", "<tools>") == 3
+
+    def test_full_minus_one(self):
+        assert _partial_tag_overlap("hello<tools", "<tools>") == 6
+
+    def test_full_tag_returns_zero(self):
+        assert _partial_tag_overlap("hello<tools>", "<tools>") == 0
+
+    def test_empty_text(self):
+        assert _partial_tag_overlap("", "<tools>") == 0
+
+    def test_false_prefix(self):
+        assert _partial_tag_overlap("hello<ta", "<tools>") == 0
 
 
 # =============================================================================

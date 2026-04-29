@@ -57,6 +57,14 @@ except ImportError:
 logger = init_logger(__name__)
 
 
+def _partial_tag_overlap(text: str, tag: str) -> int:
+    """Return the longest prefix length of *tag* matching a suffix of *text*."""
+    for k in range(min(len(tag) - 1, len(text)), 0, -1):
+        if text.endswith(tag[:k]):
+            return k
+    return 0
+
+
 @ToolParserManager.register_module(["qwen2_5_coder"])
 class Qwen25CoderToolParser(ToolParser):
     """Parser for Qwen2.5-Coder <tools> tag format.
@@ -77,6 +85,7 @@ class Qwen25CoderToolParser(ToolParser):
 
         # Streaming state
         self.current_tool_id: int = -1
+        self._sent_content_idx: int = 0
 
         # Pattern: closed tag or unclosed tag (streaming edge case)
         self.tool_call_regex = re.compile(
@@ -162,6 +171,34 @@ class Qwen25CoderToolParser(ToolParser):
                 content=model_output,
             )
 
+    def _extract_content(self, current_text: str) -> str | None:
+        """Return unsent non-tool-call content, holding back any suffix
+        that could be a partial ``<tools>`` prefix."""
+        start = self.tool_call_start_token
+        end = self.tool_call_end_token
+
+        if start not in current_text:
+            overlap = _partial_tag_overlap(current_text, start)
+            sendable_idx = len(current_text) - overlap
+        elif current_text.count(start) > current_text.count(end):
+            sendable_idx = current_text.index(start)
+        else:
+            # All tags closed — skip past last </tools>, hold back
+            # any partial <tools> prefix at the tail.
+            after_pos = current_text.rfind(end) + len(end)
+            if self._sent_content_idx < after_pos:
+                self._sent_content_idx = after_pos
+            overlap = _partial_tag_overlap(
+                current_text[after_pos:], start
+            )
+            sendable_idx = len(current_text) - overlap
+
+        if sendable_idx > self._sent_content_idx:
+            content = current_text[self._sent_content_idx:sendable_idx]
+            self._sent_content_idx = sendable_idx
+            return content
+        return None
+
     def extract_tool_calls_streaming(
         self,
         previous_text: str,
@@ -172,8 +209,7 @@ class Qwen25CoderToolParser(ToolParser):
         delta_token_ids: Sequence[int],
         request: ChatCompletionRequest,
     ) -> DeltaMessage | None:
-        """
-        Extract tool calls in streaming mode.
+        """Extract tool calls in streaming mode.
 
         Args:
             previous_text: Accumulated text up to the previous token
@@ -187,14 +223,23 @@ class Qwen25CoderToolParser(ToolParser):
         Returns:
             DeltaMessage or None
         """
-        # No <tools> tag yet — send as regular content
+        content = self._extract_content(current_text)
+
         if self.tool_call_start_token not in current_text:
-            return DeltaMessage(content=delta_text)
+            if content:
+                return DeltaMessage(content=content)
+            return None
 
         try:
-            current_matches = list(self.tool_call_closed_regex.finditer(current_text))
-            prev_matches = list(self.tool_call_closed_regex.finditer(previous_text))
+            current_matches = list(
+                self.tool_call_closed_regex.finditer(current_text)
+            )
+            prev_matches = list(
+                self.tool_call_closed_regex.finditer(previous_text)
+            )
 
+            # Detect newly completed <tools>...</tools> pairs
+            delta_tool_calls = None
             if len(current_matches) > len(prev_matches):
                 delta_tool_calls = []
                 for new_match in current_matches[len(prev_matches):]:
@@ -219,29 +264,30 @@ class Qwen25CoderToolParser(ToolParser):
                                 )
                             )
                 if delta_tool_calls:
-                    return DeltaMessage(tool_calls=delta_tool_calls)
+                    end_of_last_tag = current_matches[-1].end()
+                    if end_of_last_tag > self._sent_content_idx:
+                        self._sent_content_idx = end_of_last_tag
+                else:
+                    delta_tool_calls = None
 
             # Inside an unclosed <tools> tag — buffer until closed
             if current_text.count(self.tool_call_start_token) > \
                current_text.count(self.tool_call_end_token):
+                if content or delta_tool_calls:
+                    return DeltaMessage(
+                        content=content, tool_calls=delta_tool_calls
+                    )
                 return None
 
-            # Send delta text after the last </tools>
-            last_end_pos = current_text.rfind(self.tool_call_end_token)
-            if last_end_pos != -1:
-                after_tag = current_text[last_end_pos + len(self.tool_call_end_token):]
-                if self.tool_call_end_token in previous_text:
-                    prev_end = previous_text.rfind(
-                        self.tool_call_end_token
-                    ) + len(self.tool_call_end_token)
-                    prev_after = previous_text[prev_end:]
-                else:
-                    prev_after = ""
+            # All tags closed — pick up trailing text after </tools>
+            trailing = self._extract_content(current_text)
+            parts = [p for p in (content, trailing) if p]
+            combined = "".join(parts) or None
 
-                new_content = after_tag[len(prev_after):]
-                if new_content:
-                    return DeltaMessage(content=new_content)
-
+            if combined or delta_tool_calls:
+                return DeltaMessage(
+                    content=combined, tool_calls=delta_tool_calls
+                )
             return None
 
         except Exception:
